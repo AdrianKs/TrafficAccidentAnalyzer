@@ -43,7 +43,7 @@ public class BatchProcesser implements Runnable {
 	public void run() {
 		//Analyze number of accidents per brand
 		JavaRDD<Row> javaRDD = df.javaRDD();
-		JavaPairRDD<String, Integer> brandMap = javaRDD.mapToPair(row -> new Tuple2<>(row.getString(0), 1));
+		JavaPairRDD<String, Integer> brandMap = javaRDD.mapToPair(row -> new Tuple2<>(row.getString(3), 1));
 		reduceByBrand = brandMap.reduceByKey((a, b) -> a + b);
 		reduceByBrand = reduceByBrand.sortByKey();
 		
