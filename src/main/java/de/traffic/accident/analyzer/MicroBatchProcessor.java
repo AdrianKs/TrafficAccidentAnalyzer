@@ -1,6 +1,6 @@
 package de.traffic.accident.analyzer;
 
-import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +11,6 @@ import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaPairDStream;
 import org.apache.spark.streaming.api.java.JavaPairInputDStream;
-import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.kafka.KafkaUtils;
 
@@ -46,10 +45,11 @@ public class MicroBatchProcessor {
 		
 		words.print();
 		
-//		JavaPairDStream<String, Integer> wordCounts = words.mapToPair(word -> new Tuple2<String, Integer>(word, 1))
-//				.reduceByKey((i1, i2) -> i1 + i2);
-//		
-//		wordCounts.print();
+	
+		JavaPairDStream<String, Integer> wordCounts = words.mapToPair(word -> new Tuple2<String, Integer>(word, 1))
+				.reduceByKey((i1, i2) -> i1 + i2);
+		
+		wordCounts.print();
 		
 		streamingCont.start();
 
