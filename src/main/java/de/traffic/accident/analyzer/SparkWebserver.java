@@ -5,12 +5,14 @@ import static spark.Spark.*;
 import org.apache.log4j.BasicConfigurator;
 
 public class SparkWebserver {
+
 	
 	public SparkWebserver(){
 		 exception(Exception.class, (e, req, res) -> e.printStackTrace()); // print all exceptions
 		 staticFiles.location("/public");
 		 port(4567);
 		 get("/main", (req, res) -> "MAIN");
+
 	}
 
 //	public static void main(String[] args) {
