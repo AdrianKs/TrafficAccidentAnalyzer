@@ -1,4 +1,4 @@
 Marke,Timestamp,Longitude,Latitude,Model,Baujahr,Farbe,Anzahl-Insassen,Airbag-links-vorne,Airbag-rechts-vorn,Airbag-links-mitte,Airbag-rechts-mitte,Reifen-links-vorne,Reifen-rechts-vorne,Reifen-links-hinten,Reifen-rechts-hinten,Frontscheibe,Scheibe-links-vorne,Scheibe-rechts-vorne,Scheibe-links-hinten,Scheibe-rechts-hinten,Heckscheibe,Geschwindigkeit-vor-5-Sekunden
 Mercedes,1,47.22,8.22,A-Klasse,1999,Gelb,4,true,false,false,false,true,false,false,false,false,false,false,false,false,false,100
-Mercedes,4,47.22,8.22,A-Klasse,1999,Gelb,4,true,false,false,false,true,false,false,false,false,false,false,false,false,false,100
 Mercedes,10,47.22,8.22,A-Klasse,1999,Gelb,4,true,false,false,false,true,false,false,false,false,false,false,false,false,false,100
+Mercedes,20,47.22,8.22,A-Klasse,1999,Gelb,4,true,false,false,false,true,false,false,false,false,false,false,false,false,false,100
