@@ -51,8 +51,8 @@ public class App
     	
     	
     	threadBatchProcessor.start();
-    	//threadMicroBatchProcessor.start();
-    	//threadSampleDataProducer.start();
+    	threadMicroBatchProcessor.start();
+    	threadSampleDataProducer.start();
     	
     	
     }
