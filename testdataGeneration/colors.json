@@ -1,0 +1,38 @@
+[
+    {
+        "name": "black",
+        "p": 10
+    },
+    {
+        "name": "silver",
+        "p": 10
+    },
+    {
+        "name": "blue",
+        "p": 7
+    },
+    {
+        "name": "red",
+        "p": 4
+    },
+    {
+        "name": "white",
+        "p": 10
+    },
+    {
+        "name": "yellow",
+        "p": 2
+    },
+    {
+        "name": "green",
+        "p": 1
+    },
+    {
+        "name": "purple",
+        "p": 2
+    },
+    {
+        "name": "gray",
+        "p": 10
+    }
+]

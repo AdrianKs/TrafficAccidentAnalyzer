@@ -1,0 +1,66 @@
+[
+    {
+        "name": "Mercedes",
+        "p": 55
+    },
+    {
+        "name": "BMW",
+        "p": 60
+    },
+    {
+        "name": "Audi",
+        "p": 50
+    },
+    {
+        "name": "VW",
+        "p": 70
+    },
+    {
+        "name": "Chevrolet",
+        "p": 100
+    },
+    {
+        "name": "Ford",
+        "p": 120
+    },
+    {
+        "name": "Buick",
+        "p": 50
+    },
+    {
+        "name": "KIA",
+        "p": 80
+    },
+    {
+        "name": "GMC",
+        "p": 95
+    },
+    {
+        "name": "Hyundai",
+        "p": 110
+    },
+    {
+        "name": "Porsche",
+        "p": 10
+    },
+    {
+        "name": "Lamborghini",
+        "p": 1
+    },
+    {
+        "name": "Ferrari",
+        "p": 1
+    },
+    {
+        "name": "Honda",
+        "p": 105
+    },
+    {
+        "name": "Fiat",
+        "p": 20
+    },
+    {
+        "name": "Toyota",
+        "p": 120
+    }
+]
