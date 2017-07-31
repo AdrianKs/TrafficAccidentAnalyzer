@@ -7,6 +7,8 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SQLContext;
+import org.apache.spark.streaming.api.java.JavaStreamingContext;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -24,10 +26,10 @@ public class BatchProcesser implements Runnable {
 	private SQLContext sqlContext = null;
 	
 	
-	public BatchProcesser() {
+	public BatchProcesser(JavaSparkContext jsContext) {
 				Logging.setLoggingDefaults();
-		this.conf = new SparkConf().setMaster("local[*]").setAppName("Batch Processor");
-		this.sc = new JavaSparkContext(conf);
+		
+		this.sc = jsContext;
 
 		this.sqlContext = new SQLContext(sc);
 
