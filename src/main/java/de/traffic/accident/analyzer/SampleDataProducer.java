@@ -14,16 +14,11 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.collect.Sets;
-import com.google.common.util.concurrent.AbstractExecutionThreadService;
-import com.google.common.util.concurrent.Service;
-import com.google.common.util.concurrent.ServiceManager;
 
-public class SampleDataProducer extends AbstractExecutionThreadService {
+public class SampleDataProducer implements Runnable {
 
 	private final Logger log = LoggerFactory.getLogger(SampleDataProducer.class);
 	private final KafkaProducer<String, String> producer;
@@ -44,7 +39,7 @@ public class SampleDataProducer extends AbstractExecutionThreadService {
 	}
 
 	@Override
-	protected void run() throws Exception {
+	public void run() {
 		try {
 			Reader in = new FileReader(csvFile);
 			CSVParser parser = new CSVParser(in, CSVFormat.EXCEL.withHeader());
@@ -90,6 +85,7 @@ public class SampleDataProducer extends AbstractExecutionThreadService {
 
 	private String createMessage(CSVRecord record) {
 		String myResult = "";
+		
 		for (int i = 0; i < record.size(); i++) {
 			if(i != record.size() -1){
 				myResult += record.get(i) + ",";
@@ -101,13 +97,13 @@ public class SampleDataProducer extends AbstractExecutionThreadService {
 		return myResult;
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		BasicConfigurator.configure();
 		Set<Service> services = Sets.newHashSet(new SampleDataProducer());
 		ServiceManager serviceManager = new ServiceManager(services);
 		serviceManager.startAsync().awaitHealthy();
 
 		serviceManager.awaitStopped();
-	}
+	}*/
 
 }
