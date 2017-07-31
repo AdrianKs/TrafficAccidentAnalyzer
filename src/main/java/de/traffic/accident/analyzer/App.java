@@ -19,6 +19,13 @@ public class App
 	
 	SampleDataProducer sampleDataProducer = null;
 	
+	final static SparkConf conf = new SparkConf().setMaster("local[*]").setAppName("Batch Processor");
+	
+	final static JavaSparkContext sc = new JavaSparkContext(conf);
+
+    final static JavaStreamingContext ssc = new JavaStreamingContext(sc, Durations.seconds(10));
+	
+	
 	
     public static void main( String[] args )
     {
@@ -28,15 +35,8 @@ public class App
     public App(){
     	Logging.setLoggingDefaults();
     	//sparkServer = new SparkWebserver();
-    	
-    	SparkConf conf = null;
-   
-    	
-    	conf = new SparkConf().setMaster("local[*]").setAppName("Batch Processor");
 		
-    	final JavaSparkContext sc = new JavaSparkContext(conf);
-
-        final JavaStreamingContext ssc = new JavaStreamingContext(sc, Durations.seconds(10));
+    	
     	
     	
     	batchProcessor = new BatchProcesser(sc);
@@ -53,7 +53,6 @@ public class App
     	threadBatchProcessor.start();
     	threadMicroBatchProcessor.start();
     	threadSampleDataProducer.start();
-    	
     	
     	
     }

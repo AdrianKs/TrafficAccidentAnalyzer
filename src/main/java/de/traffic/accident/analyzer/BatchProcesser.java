@@ -7,7 +7,6 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SQLContext;
-import org.apache.spark.streaming.api.java.JavaStreamingContext;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,7 +26,7 @@ public class BatchProcesser implements Runnable {
 	
 	
 	public BatchProcesser(JavaSparkContext jsContext) {
-				Logging.setLoggingDefaults();
+		//Logging.setLoggingDefaults();
 		
 		this.sc = jsContext;
 
@@ -53,9 +52,10 @@ public class BatchProcesser implements Runnable {
 		
         
         JsonByBrand = gson.toJson(reduceByBrand.collect());
+        System.out.println(reduceByBrand.collect());
 		//return gson.toJson(reduceByBrand.collect());
         
-        sc.close();
+        //sc.close();
 	}
 	
 	public static String getJsonByBrand(){
