@@ -1,0 +1,19 @@
+{
+    "Mercedes": ["A-Klasse", "B-Klasse", "C-Klasse", "E-Klasse", "G-Klasse"],
+    "BMW": ["1er", "2er", "3er", "4er", "5er", "X3", "X5"],
+    "Audi": ["A3", "A4", "A5", "A6", "Q5", "Q7"],
+    "VW": ["Passat", "Golf", "Jetta", "Tiguan"],
+    "Chevrolet": ["Camero", "Sonic", "Cruze", "Malibu", "Impala", "Camaro", "Suburban", "Tahoe", "Colorado",
+                  "Silverado"],
+    "Ford": ["Fiesta", "Focus", "Fusion", "C-Max", "S-Max", "Mustang", "Escape", "Explorer", "Superduty"],
+    "Buick": ["Regal", "Lacrosse", "Cascada", "Verano"],
+    "KIA": ["Rio", "K900", "Carens", "Cadenza", "Optima", "Sportage", "Sedona"],
+    "GMC": ["Danyon", "Sierra", "Terrain", "Yukon"],
+    "Hyundai": ["Elantra", "Sonata", "Accent", "Santa Fe", "Tucson"],
+    "Porsche": ["718 Cayman", "718 Boxter", "911 Carrera", "911 Turbo", "GT3"],
+    "Lamborghini": ["Huracan", "Aventador", "Centenario", "Gallardo"],
+    "Ferrari": ["812 Superfast", "GTC4 Lusso", "488 Spider", "California T", "La Ferrari"],
+    "Honda": ["Jazz", "Civi", "Civic Limousine", "Civic Tourer", "HR-V", "CR-V"],
+    "Fiat": ["500", "Punto"],
+    "Toyota": ["Yaris", "Auris", "Corolla", "Verso", "Avensis"]
+}
