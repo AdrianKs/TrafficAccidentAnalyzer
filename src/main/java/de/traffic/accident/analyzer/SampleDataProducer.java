@@ -53,9 +53,9 @@ public class SampleDataProducer implements Runnable {
 				String messageRecord = createMessage(record);
 
 				if (counter != 0) {
-					int tmpTimestamp = Integer.parseInt(record.get("Timestamp"));
+					int tmpTimestamp = Integer.parseInt(record.get("timestamp"));
 					CSVRecord tmpRecord = list.get(counter - 1);
-					deltaTime = tmpTimestamp - Integer.parseInt(tmpRecord.get("Timestamp"));
+					deltaTime = tmpTimestamp - Integer.parseInt(tmpRecord.get("timestamp"));
 				}
 
 				producer.send(new ProducerRecord<String, String>(topic, "" + messageNo, messageRecord),
