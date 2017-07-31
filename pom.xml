@@ -47,6 +47,15 @@
 			<version>2.33</version>
 		</dependency>
 		
+		<!-- SPARK WEBSERVER AND LOGGING -->
+		
+		  <dependency>
+    <groupId>com.sparkjava</groupId>
+    <artifactId>spark-core</artifactId>
+    <version>2.6.0</version>
+</dependency>
+
+		
 		
 		<!-- Spark dependencies -->
 		<dependency>
