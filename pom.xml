@@ -12,9 +12,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<spark.version>1.6.2</spark.version>
-	<scala.binary.version>2.10</scala.binary.version>
+	<scala.binary.version>2.11</scala.binary.version>
   </properties>
 
   <dependencies>
@@ -197,8 +196,49 @@
 
 		</plugins>
 	</build>
+	
+	
+		<distributionManagement>
+		<repository>
+			<id>farberg</id>
+			<name>Farberg Releases</name>
+			<url>http://nexus.farberg.de/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>farberg</id>
+			<name>Farberg Releases</name>
+			<url>http://nexus.farberg.de/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
+	
 
 	<repositories>
+	
+	<repository>
+			<id>farberg-releases</id>
+			<url>http://nexus.farberg.de/content/repositories/releases/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>farberg-snapshots</id>
+			<url>http://nexus.farberg.de/content/repositories/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	
+	
+	
+	
 		<repository>
 			<id>itm-maven-repository-releases</id>
 			<name>ITM UzL Maven releases repository</name>

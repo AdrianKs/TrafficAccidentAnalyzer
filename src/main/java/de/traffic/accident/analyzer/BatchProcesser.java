@@ -12,6 +12,9 @@ import de.uniluebeck.itm.util.logging.Logging;
 import scala.Tuple2;
 
 public class BatchProcesser {
+	
+	public static JavaPairRDD<String, Integer> reduceByBrand;
+	public static JavaPairRDD<Integer, Integer> reduceByYear;
 
 	public static void main(String[] args) {
 		Logging.setLoggingDefaults();
@@ -28,16 +31,32 @@ public class BatchProcesser {
 			    .format("com.databricks.spark.csv")
 			    .option("inferSchema", "true")
 			    .option("header", "true")
-			    .load("src/main/resources/sumo-sim-out.csv");
+			    .load("src/main/resources/taa.csv");
 		
+		
+		//Analyze number of accidents per brand
 		JavaRDD<Row> javaRDD = df.javaRDD();
-		JavaPairRDD<String, Integer> brandMap = javaRDD.mapToPair(row -> new Tuple2<>(row.getString(1), 1));
-		JavaPairRDD<String, Integer> reduceByBrand = brandMap.reduceByKey((a, b) -> a + b);
-		
+		JavaPairRDD<String, Integer> brandMap = javaRDD.mapToPair(row -> new Tuple2<>(row.getString(0), 1));
+		reduceByBrand = brandMap.reduceByKey((a, b) -> a + b);
 		reduceByBrand = reduceByBrand.sortByKey();
+		
+		
+		//Analyze number of accidents per age of car
+		JavaPairRDD<Integer, Integer> yearMap = javaRDD.mapToPair(row -> new Tuple2<>(row.getInt(5), 1));
+		reduceByYear = yearMap.reduceByKey((a, b) -> a + b);
+		reduceByYear = reduceByYear.sortByKey();
+		
 		
 		System.out.println("brandMap: " + brandMap.collect());
 		System.out.println("reduceByBrand: " + reduceByBrand.collect());
+		
+		for(Tuple2 t: reduceByBrand.collect()) {
+			System.out.println(t._1 + ": " + t._2);
+		}
+		
+		for(Tuple2 t: reduceByYear.collect()) {
+			System.out.println(t._1 + ": " + t._2);
+		}
 
 		sc.close();
 
