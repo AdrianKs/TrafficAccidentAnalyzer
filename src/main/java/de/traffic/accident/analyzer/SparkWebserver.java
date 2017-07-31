@@ -9,6 +9,7 @@ public class SparkWebserver {
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
 		get("/test", (req, res) -> "<html><h3>TEST</h3></html>");
+		get("/batch", (req, res) -> BatchProcesser.getData());
 		// TODO Auto-generated method stub
 
 	}
