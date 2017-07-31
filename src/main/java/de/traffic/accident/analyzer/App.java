@@ -1,13 +1,22 @@
 package de.traffic.accident.analyzer;
 
-/**
- * Hello world!
- *
- */
+import de.uniluebeck.itm.util.logging.Logging;
+
 public class App 
 {
+	
+	
+	SparkWebserver sparkServer = null;
+	
+	
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+    	App app = new App();
+    }
+    
+    public App(){
+    	Logging.setLoggingDefaults();
+    	sparkServer = new SparkWebserver();
+    	
     }
 }

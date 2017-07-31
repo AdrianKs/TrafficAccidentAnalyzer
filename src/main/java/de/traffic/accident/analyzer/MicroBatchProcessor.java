@@ -45,22 +45,19 @@ public class MicroBatchProcessor {
 		
 		words.print();
 		
-	
-		JavaPairDStream<String, Integer> wordCounts = words.mapToPair(word -> new Tuple2<String, Integer>(word, 1))
-				.reduceByKey((i1, i2) -> i1 + i2);
 		
-		wordCounts.print();
+	
+//		JavaPairDStream<String, Integer> wordCounts = words.mapToPair(word -> new Tuple2<String, Integer>(word, 1))
+//				.reduceByKey((i1, i2) -> i1 + i2);
+//		
+//		wordCounts.print();
 		
 		streamingCont.start();
 
 		streamingCont.awaitTermination();
 		streamingCont.close();
+	
 		
-//		JavaReceiverInputDStream<String> lines = streamingCont.socketTextStream("localhost", 9092);
-//		JavaDStream<String> words = lines.flatMap(x -> Arrays.asList(x.split(" ")).iterator());
-		
-		
-
 	}
 
 }
