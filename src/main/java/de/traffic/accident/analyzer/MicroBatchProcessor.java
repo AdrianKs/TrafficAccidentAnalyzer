@@ -15,6 +15,7 @@ import org.apache.spark.streaming.kafka.KafkaUtils;
 import com.google.common.collect.Lists;
 
 import kafka.serializer.StringDecoder;
+import scala.Tuple2;
 
 public class MicroBatchProcessor implements Runnable{
 	
@@ -43,9 +44,16 @@ public class MicroBatchProcessor implements Runnable{
 			    		 String.class, String.class,StringDecoder.class, StringDecoder.class,
 			        kafkaParams,topics);
 		
-		JavaDStream<String> words = lines.flatMap(x -> Lists.newArrayList(x._2.split(" ")));
+		JavaDStream<String> accidents = lines.flatMap(x -> Lists.newArrayList(x._2.split(" ")));
 		
-		words.print();
+		accidents.print();
+		JavaDStream a = accidents.flatMap(x -> Lists.newArrayList(x.split(",")));
+		a.print();
+		//a.map(atttribute -> new Accident(attribute));
+		
+		/*for(Tuple2 t: data.collect()) {
+			System.out.println(t._1 + ": " + t._2);
+		}*/
 		
 		
 		this.streamingCont.start();

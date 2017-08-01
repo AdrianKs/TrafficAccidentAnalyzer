@@ -50,7 +50,7 @@ public class App
     	Thread threadSampleDataProducer = new Thread(sampleDataProducer);
     	
     	
-    	threadBatchProcessor.start();
+    	//threadBatchProcessor.start();
     	threadMicroBatchProcessor.start();
     	threadSampleDataProducer.start();
     	

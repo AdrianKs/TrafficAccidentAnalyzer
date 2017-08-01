@@ -31,6 +31,43 @@ public class Accident {
 	private int v1SecAgo = 0;
 	
 	
+	public Accident(int timestamp, double latitude, double longitude, String brand, String model, int constrYear,
+			String color, int passenger, Boolean abLeftFront, Boolean abRightFront, Boolean abLeftMid,
+			Boolean abRightMid, Boolean tireLeftFront, Boolean tireRightFront, Boolean tireLeftRear,
+			Boolean tireRightRear, Boolean windowFront, Boolean windowLeftFront, Boolean windowRightFront,
+			Boolean windowLeftRear, Boolean windowRightRear, Boolean windowRear, int v10SecAgo, int v5SecAgo,
+			int v3SecAgo, int v2SecAgo, int v1SecAgo) {
+		super();
+		this.timestamp = timestamp;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.brand = brand;
+		this.model = model;
+		this.constrYear = constrYear;
+		this.color = color;
+		this.passenger = passenger;
+		this.abLeftFront = abLeftFront;
+		this.abRightFront = abRightFront;
+		this.abLeftMid = abLeftMid;
+		this.abRightMid = abRightMid;
+		this.tireLeftFront = tireLeftFront;
+		this.tireRightFront = tireRightFront;
+		this.tireLeftRear = tireLeftRear;
+		this.tireRightRear = tireRightRear;
+		this.windowFront = windowFront;
+		this.windowLeftFront = windowLeftFront;
+		this.windowRightFront = windowRightFront;
+		this.windowLeftRear = windowLeftRear;
+		this.windowRightRear = windowRightRear;
+		this.windowRear = windowRear;
+		this.v10SecAgo = v10SecAgo;
+		this.v5SecAgo = v5SecAgo;
+		this.v3SecAgo = v3SecAgo;
+		this.v2SecAgo = v2SecAgo;
+		this.v1SecAgo = v1SecAgo;
+	}
+
+
 	public int getTimestamp() {
 		return timestamp;
 	}
