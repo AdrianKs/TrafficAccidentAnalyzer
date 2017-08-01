@@ -253,7 +253,19 @@ with open('../src/main/resources/taa.csv', 'wb') as csvfile:
         longitude = latAndLong[1]
         brand = getBrand()
         model = getModel(brand)
-        constrYear = random.randint(1997, 2016)
+
+        p = random.randint(1,100);
+        if p <= 20:
+            constrYear = random.randint(1995, 1996)
+        elif p > 20 and p <= 40:
+            constrYear = random.randint(1997, 1999)
+        elif p > 40 and p <= 60:
+            constrYear = random.randint(2000, 2003)
+        elif p > 60 and p <= 85:
+            constrYear = random.randint(2004, 2011)
+        else:
+            constrYear = random.randint(2012, 2017)
+
         color = getColor()
         passengers = random.randint(1, 5)
 
