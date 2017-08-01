@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.spark.SparkConf;
+import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaPairInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
@@ -15,6 +16,7 @@ import com.google.common.collect.Lists;
 
 import kafka.serializer.StringDecoder;
 import scala.Tuple2;
+import scala.tools.scalap.scalax.rules.scalasig.SymbolInfoSymbol;
 
 public class MicroBatchProcessor implements Runnable {
 
@@ -38,8 +40,7 @@ public class MicroBatchProcessor implements Runnable {
 		topics.add("accidents");
 		JavaPairInputDStream<String, String> lines = KafkaUtils.createDirectStream(this.streamingCont, String.class,
 				String.class, StringDecoder.class, StringDecoder.class, kafkaParams, topics);
-
-		JavaDStream<Accident> accidents = lines.map(x -> {
+		JavaDStream<Accident> accidents = lines.window(Durations.seconds(120), Durations.seconds(60)).map(x -> {
 			 ArrayList<String> elements = Lists.newArrayList(x._2.split(","));
 			 return new Accident(
 					 Integer.parseInt(elements.get(0)), 
@@ -73,12 +74,14 @@ public class MicroBatchProcessor implements Runnable {
 		
 		
 		
-
-		accidents.foreachRDD(rdd -> {
-			rdd.foreach(accident -> {
-				accident.printValues();
-			});
-		});
+		
+//		accidents.foreachRDD(rdd -> {
+//			System.out.println("RDD LENGTH: " + Long.toString((rdd.count())));
+//			rdd.foreach(accident -> {
+//				accident.printValues();
+//			});
+//		});
+		
 		//accidents.print();
 		// a.map(atttribute -> new Accident(attribute));
 

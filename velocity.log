@@ -1,2 +1,5 @@
 2017-07-31 22:37:57,966 - ResourceManager : unable to find resource 'index.vm' in any resource loader.
 2017-07-31 22:44:41,027 - ResourceManager : unable to find resource 'index.vm' in any resource loader.
+2017-08-01 18:25:12,235 - ResourceManager : unable to find resource '#foreach($value in $values) <p>$value</p> #end' in any resource loader.
+2017-08-01 18:27:00,057 - ResourceManager : unable to find resource '#foreach($value in $values) <p>$value</p> #end' in any resource loader.
+2017-08-01 18:27:55,503 - ResourceManager : unable to find resource '#foreach($value in $values) <p>$value</p> #end' in any resource loader.
