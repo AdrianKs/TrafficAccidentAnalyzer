@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+   <link href="./css/myCss.css" rel="stylesheet">
    <meta charset="UTF-8"></meta>
    <title>Hello world</title>
 </head>
 <body>
-<p th:inline="text">Hello ${name}!</p>
+	<div class="container">
+		<div class="mapContainer">
+			<p th:inline="text">Hello ${name}!</p>
+		</div>
+		<div class="diagram1Container">
+			<p th:inline="text">Hello ${name}!</p>
+		</div>
+		<div class="diagram2Container">
+			<p th:inline="text">Hello ${name}!</p>
+		</div>
+		<div class="diagram3Container">
+			<p th:inline="text">Hello ${name}!</p>
+		</div>
+		<div class="diagram4Container">
+			<p th:inline="text">Hello ${name}!</p>
+		</div>
+		<div class="diagram5Container">
+			<p th:inline="text">Hello ${name}!</p>
+		</div>
+	</div>
 </body>
 </html>

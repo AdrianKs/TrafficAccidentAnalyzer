@@ -39,7 +39,7 @@ public class App
     	
     	
     	
-    	batchProcessor = new BatchProcesser(sc);
+    	/*batchProcessor = new BatchProcesser(sc);
     	microBatchProcessor = new MicroBatchProcessor(ssc);
     	sampleDataProducer = new SampleDataProducer();
     	
@@ -52,7 +52,7 @@ public class App
     	
     	threadBatchProcessor.start();
     	threadMicroBatchProcessor.start();
-    	threadSampleDataProducer.start();
+    	threadSampleDataProducer.start();*/
     	
     	
     }
