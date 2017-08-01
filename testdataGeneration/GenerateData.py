@@ -246,7 +246,7 @@ with open('../src/main/resources/taa.csv', 'wb') as csvfile:
                             quotechar='\'', quoting=csv.QUOTE_MINIMAL)
     spamwriter.writerow(headerRow)
 
-    for i in range(10000):
+    for i in range(100000):
         timestamp = timestamp + random.randint(1, 10)
         latAndLong = getLatAndLong()
         latitude = latAndLong[0]
