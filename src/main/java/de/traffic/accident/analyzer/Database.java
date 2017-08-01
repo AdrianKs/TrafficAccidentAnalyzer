@@ -1,9 +1,12 @@
 package de.traffic.accident.analyzer;
 
+import java.util.ArrayList;
+
 import com.google.gson.JsonElement;
 
 public final class Database {
 
+	private static ArrayList<String[]> WindowData = new ArrayList<String[]>();
 	private static JsonElement NumbAccidentsToBrand = null;
 	private static JsonElement NumbAccidentsToYearOfCar = null;
 	private static JsonElement NumbAccidentsToNumbPasseger = null;
@@ -53,6 +56,33 @@ public final class Database {
 	public static void setNumbOfDiffAccidentType(JsonElement numbOfDiffAccidentType) {
 		NumbOfDiffAccidentType = numbOfDiffAccidentType;
 	}
+
+
+	public static ArrayList<String[]> getWindowData() {
+		return WindowData;
+	}
+
+
+	public static void setWindowData(ArrayList<String[]> windowData) {
+		WindowData = windowData;
+	}
+	
+	public static void addArrayToWindowData(String[] array){
+		WindowData.add(array);
+		printElements();
+	}
+	
+	private static void printElements(){
+		for (int i = 0; i < WindowData.size(); i++) {
+			System.out.println("ELEMENT-CONTENTS-LAT: " + WindowData.get(i)[0] + ", LONG: " + WindowData.get(i)[1]);
+		}
+	}
+	
+	public static void setHeatMapData(){
+		//SparkWebserver.setNewAccidentData(WindowData);
+	}
+	
+	
 	
 	
 }
