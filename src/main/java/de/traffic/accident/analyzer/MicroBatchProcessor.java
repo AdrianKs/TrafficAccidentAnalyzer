@@ -67,8 +67,8 @@ public class MicroBatchProcessor implements Runnable {
 					 Integer.parseInt(elements.get(22)), 
 					 Integer.parseInt(elements.get(23)), 
 					 Integer.parseInt(elements.get(24)),
-			 		Integer.parseInt(elements.get(25)),
-					Integer.parseInt(elements.get(26)));
+			 		 Integer.parseInt(elements.get(25)),
+				 	 Integer.parseInt(elements.get(26)));
 		});
 		
 		
