@@ -30,7 +30,7 @@ public class Accident {
 	private int v2SecAgo = 0;
 	private int v1SecAgo = 0;
 	
-	private int accidentType = 0;
+	private AccidentType accidentType = null;
 	
 	
 	public Accident(int timestamp, double latitude, double longitude, String brand, String model, int constrYear,
@@ -265,10 +265,10 @@ public class Accident {
 	public void setV1SecAgo(int v1SecAgo) {
 		this.v1SecAgo = v1SecAgo;
 	}
-	public int getAccidentType(){
+	public AccidentType getAccidentType(){
 		return accidentType;
 	}
-	public void setAccidentType(int accidentType){
+	public void setAccidentType(AccidentType accidentType){
 		this.accidentType = accidentType;
 	}
 	
