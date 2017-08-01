@@ -269,7 +269,20 @@ with open('../src/main/resources/taa.csv', 'wb') as csvfile:
         color = getColor()
         passengers = random.randint(1, 5)
 
-        v10SecAgo = random.randint(0, 220)
+        p = random.randint(1, 100);
+        if p <= 10:
+            v10SecAgo = random.randint(00, 39)
+        elif p > 10 and p <= 25:
+            v10SecAgo = random.randint(40, 69)
+        elif p > 25 and p <= 40:
+            v10SecAgo = random.randint(70, 99)
+        elif p > 40 and p <= 55:
+            v10SecAgo = random.randint(100, 129)
+        elif p > 55 and p <= 75:
+            v10SecAgo = random.randint(130, 169)
+        else:
+            v10SecAgo = random.randint(170, 220)
+
         v5SecAgo = random.randint(int(v10SecAgo * 0.5), int(v10SecAgo * 1.3))
         v3SecAgo = random.randint(int(v5SecAgo * 0.5), int(v5SecAgo * 1.3))
         v2SecAgo = random.randint(int(v3SecAgo * 0.4), int(v3SecAgo * 1.2))
