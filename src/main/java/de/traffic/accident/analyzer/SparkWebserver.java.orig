@@ -29,4 +29,16 @@ public class SparkWebserver {
 }
 
 
+<<<<<<< HEAD
+//	public static void main(String[] args) {
+//		BasicConfigurator.configure();
+//		get("/test", (req, res) -> "<html><h3>TEST</h3></html>");
+//		get("/batch", (req, res) -> BatchProcesser.getData());
+//		// TODO Auto-generated method stub
+//
+//	}
+	
+	
+=======
+>>>>>>> 58003091562387e2ba909c636b96986b428765cb
 
