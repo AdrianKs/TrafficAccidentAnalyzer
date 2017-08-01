@@ -1,32 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-   <link href="myCss.css" rel="stylesheet">
-   <script src="app.js" type="text/javascript"></script>
-   <script src="realworldpoints.js" type="text/javascript"></script>
-   <script src="leaflet-heat.js" type="text/javascript"></script>
-       <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-    <style>
-        #map { width: 800px; height: 600px; }
-        body { font: 16px/1.4 "Helvetica Neue", Arial, sans-serif; }
-        .ghbtns { position: relative; top: 4px; margin-left: 5px; }
-        a { color: #0077ff; }
-    </style
+   <link href="../css/myCss.css" rel="stylesheet">
+   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+   <script src="../js/app.js" type="text/javascript"></script>
+   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
    <meta charset="UTF-8"></meta>
    <title>Hello world</title>
 </head>
 <body>
 	<div class="container">
 		<div class="mapContainer">
-			<p>
-    A 10,000-point demo of <a href="https://github.com/Leaflet/Leaflet.heat">Leaflet.heat</a>, a tiny and fast Leaflet heatmap plugin.
-    <iframe class="ghbtns" src="http://ghbtns.com/github-btn.html?user=Leaflet&amp;repo=Leaflet.heat&amp;type=watch&amp;count=true"
-  allowtransparency="true" frameborder="0" scrolling="0" width="90" height="20"></iframe>
-</p>
-
-<div id="map"></div>
+			<div id="map"></div>
 		</div>
+		
 		<div class="diagram1Container">
 			<p th:inline="text">Hello ${name}!</p>
 		</div>
@@ -40,24 +27,19 @@
 		
 	</div>
 	
-	
-	
-
-
-<script>
-
-var map = L.map('map').setView([43.70, -79.375], 12);
-
-var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
-
-addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
-
-var heat = L.heatLayer(addressPoints).addTo(map);
-
-</script>
-	
+	<script src="../js/test1.js"></script>
+	<script src="../js/realworldpoints.js"></script>
+	<script>
+		var map = L.map('map').setView([43.70, -79.375], 12);
+		
+		var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+		}).addTo(map);
+		
+		addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
+		
+		var heat = L.heatLayer(addressPoints).addTo(map);
+	</script>
 	
 </body>
 </html>
