@@ -91,12 +91,12 @@ public class App {
 	}
 
 	public static AccidentType analyzeAccident(Accident accident) {
-		int tiresDamaged = tiresOrAirbagsDamaged(accident.tireLeftFront, accident.tireRightFront, accident.tireLeftRear,
-				accident.tireRightRear);
-		int windowsDamaged = windowsDamaged(accident.windowFront, accident.windowLeftFront, accident.windowRightFront,
-				accident.windowLeftRear, accident.windowRightRear, accident.windowRears);
-		int airbagsTriggered = tiresOrAirbagsDamaged(accident.abLeftFront, accident.abRightFront, accident.abLeftMid,
-				accident.tireRightMid);
+		int tiresDamaged = tiresOrAirbagsDamaged(accident.getTireLeftFront(), accident.getTireRightFront(), accident.getTireLeftRear(),
+				accident.getTireRightRear());
+		int windowsDamaged = windowsDamaged(accident.getWindowFront(), accident.getWindowLeftFront(), accident.getWindowRightFront(),
+				accident.getWindowLeftRear(), accident.getWindowRightRear(), accident.getWindowRear());
+		int airbagsTriggered = tiresOrAirbagsDamaged(accident.getAbLeftFront(), accident.getAbRightFront(), accident.getAbLeftMid(),
+				accident.getAbRightMid());
 
 		if (tiresDamaged == 0 && airbagsTriggered == 0) {
 			if (windowsDamaged == 1) {
@@ -104,6 +104,9 @@ public class App {
 			}
 			if (windowsDamaged > 1) {
 				return AccidentType.FLYING_OBJECT;
+			}
+			else {
+				return AccidentType.NOT_ANALYZABLE;
 			}
 		}
 		else if(tiresDamaged >= 1 && airbagsTriggered == 0 && windowsDamaged == 0){
