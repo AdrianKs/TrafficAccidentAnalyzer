@@ -91,6 +91,15 @@ public class BatchProcesser implements Runnable {
 		Database.setNumbOfDiffAccidentType(jsonByAccidentType);
 		System.out.println(jsonByAccidentType);
 		
+		
+		//Analyze number of accidents per velocity (v10, v5)
+		JavaPairRDD<String, Integer> velocityMap = javaRDD.mapToPair(row -> new Tuple2<>(calculateVelocityCluster(row.getInt(23), row.getInt(22)), 1));
+		JavaPairRDD<String, Integer>reduceByVelocity = velocityMap.reduceByKey((a, b) -> a + b);
+		reduceByVelocity = reduceByVelocity.sortByKey();
+		JsonElement jsonByVelocity = gson.toJsonTree(reduceByVelocity.collect());
+		Database.setNumbAccidentsToVelocity(jsonByVelocity);
+		System.out.println(jsonByVelocity);
+		
 		//Analyze number of accidents per brand
 		JavaPairRDD<String, Integer> brandMap = javaRDD.mapToPair(row -> new Tuple2<>(row.getString(3), 1));
 		reduceByBrand = brandMap.reduceByKey((a, b) -> a + b);
@@ -118,6 +127,40 @@ public class BatchProcesser implements Runnable {
         printDataInteger(reduceByAge);
         System.out.println("Accidents per passengers in car");
         printDataInteger(reduceByPassenger);
+        System.out.println("Accidents Velocity");
+        printDataString(reduceByVelocity);
+	}
+	
+	
+	private static String calculateVelocityCluster(int v5, int v10) {
+		int average = (v5 + v10)/2;
+		if(average <= 30) {
+			return "0-30";
+		}
+		else if( average <= 60) {
+			return "31-60";
+		}
+		else if(average <= 90) {
+			return "61-90";
+		}
+		else if(average <= 120) {
+			return "91-120";
+		}
+		else if(average <= 150) {
+			return "121-150";
+		}
+		else if(average <= 180) {
+			return "151-180";
+		}
+		else if(average <= 210) {
+			return "181-210";
+		}
+		else if(average <= 250) {
+			return "211-250";
+		}
+		else {
+			return ">250";
+		}
 	}
 	
 	private void printDataInteger(JavaPairRDD<Integer, Integer> data) {
