@@ -7,5 +7,4 @@ public enum AccidentType {
 	GRAVE_COLLISION,
 	MODERATE_COLLISION,
 	LIGHT_COLLISION;
-	
 }
