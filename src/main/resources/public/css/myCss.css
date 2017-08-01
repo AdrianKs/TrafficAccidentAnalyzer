@@ -4,23 +4,36 @@ body {
 
 .mapContainer {
 	position: absolute;
-	border: 1px solid black;
-	width: 30%;
-	height: 30%;
-	top: 0;
-	left: 0;
+    border: 1px solid black;
+    width: 70%;
+    height: 60%;
+    top: 0;
+    left: 0;
 }
 
 .diagram2Container {
 	position: absolute;
-	border: 1px solid black;
-	right: 0;
-	top: 0;
+    border: 1px solid black;
+    right: 0;
+    top: 0;
+    width: 28%;
+    height: 60%;
 }
 
 .diagram3Container {
 	position: absolute;
-	border: 1px solid black;
-	left: 0;
-	bottom: 0;
+    border: 1px solid black;
+    left: 0;
+    bottom: 0;
+    width: 49%;
+    height: 38%;
+}
+
+.diagram1Container{
+	position: absolute;
+    border: 1px solid black;
+    width: 49%;
+    height: 38%;
+    bottom: 0;
+    right: 0;
 }
