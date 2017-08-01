@@ -21,8 +21,6 @@ public class App {
 
 	final static JavaSparkContext sc = new JavaSparkContext(conf);
 
-<<<<<<< 30bd12d7d72649fa8d182b02a877f16d0b434380
-
 	final static JavaStreamingContext ssc = new JavaStreamingContext(sc, Durations.seconds(10));
 
 	public static void main(String[] args) {
@@ -125,45 +123,4 @@ public class App {
 			return AccidentType.LIGHT_COLLISION;
 		}
 	}
-=======
-    final static JavaStreamingContext ssc = new JavaStreamingContext(sc, Durations.seconds(10));
-	
-	
-	
-    public static void main( String[] args )
-    {
-    	App app = new App();
-    }
-    
-    public App(){
-    	Logging.setLoggingDefaults();
-    	sparkServer = new SparkWebserver();
-		
-    	
-    	
-    	
-//    	batchProcessor = new BatchProcesser(sc);
-//    	microBatchProcessor = new MicroBatchProcessor(ssc);
-//    	sampleDataProducer = new SampleDataProducer();
-//    	
-//    	
-//    	
-//    	Thread threadBatchProcessor = new Thread(batchProcessor);
-//    	Thread threadMicroBatchProcessor = new Thread(microBatchProcessor);
-//    	Thread threadSampleDataProducer = new Thread(sampleDataProducer);
-//    	
-//    	
-//    	threadBatchProcessor.start();
-//    	//threadMicroBatchProcessor.start();
-//    	threadSampleDataProducer.start();
-    	
-    	
-    }
-    
-    public static int calcAccident(boolean abLeftFront, boolean abRigrhtFront, boolean abLeftMid, boolean abRightMid, boolean tireLeftFront, boolean tireRightFront, boolean tireLeftRear, boolean tireRightRear) {
-    	
-    	
-    	return 1;
-    }
->>>>>>> spark shit
 }
