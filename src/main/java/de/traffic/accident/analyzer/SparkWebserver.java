@@ -14,7 +14,7 @@ public class SparkWebserver {
 	
 	public SparkWebserver(){
 		 exception(Exception.class, (e, req, res) -> e.printStackTrace()); // print all exceptions
-		 //staticFiles.location("/public");
+		 staticFiles.location("/public/css");
 		 port(4567);
 		
 		 

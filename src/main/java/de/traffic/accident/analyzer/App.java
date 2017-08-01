@@ -39,20 +39,20 @@ public class App
     	
     	
     	
-    	batchProcessor = new BatchProcesser(sc);
-    	microBatchProcessor = new MicroBatchProcessor(ssc);
-    	sampleDataProducer = new SampleDataProducer();
-    	
-    	
-    	
-    	Thread threadBatchProcessor = new Thread(batchProcessor);
-    	Thread threadMicroBatchProcessor = new Thread(microBatchProcessor);
-    	Thread threadSampleDataProducer = new Thread(sampleDataProducer);
-    	
-    	
-    	threadBatchProcessor.start();
-    	threadMicroBatchProcessor.start();
-    	threadSampleDataProducer.start();
+//    	batchProcessor = new BatchProcesser(sc);
+//    	microBatchProcessor = new MicroBatchProcessor(ssc);
+//    	sampleDataProducer = new SampleDataProducer();
+//    	
+//    	
+//    	
+//    	Thread threadBatchProcessor = new Thread(batchProcessor);
+//    	Thread threadMicroBatchProcessor = new Thread(microBatchProcessor);
+//    	Thread threadSampleDataProducer = new Thread(sampleDataProducer);
+//    	
+//    	
+//    	threadBatchProcessor.start();
+//    	//threadMicroBatchProcessor.start();
+//    	threadSampleDataProducer.start();
     	
     	
     }
