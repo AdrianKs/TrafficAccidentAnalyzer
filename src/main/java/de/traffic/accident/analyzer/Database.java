@@ -82,6 +82,18 @@ public final class Database {
 		//SparkWebserver.setNewAccidentData(WindowData);
 	}
 	
+	public static String getString() {
+		String s = "[";
+		for (int i = 0; i < WindowData.size(); i++) {
+			s += "[" + WindowData.get(i)[0] + ", " + WindowData.get(i)[1] + "]";
+			if(i<WindowData.size()-1) {
+				s+=",";
+			}
+		}
+		s += "]";
+		return s;
+	}
+	
 	
 	
 	

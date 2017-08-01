@@ -1,4 +1,1 @@
-${values}
-#foreach($value in ${adressPoints})
-<p>$value</p>
-#end
+${test}

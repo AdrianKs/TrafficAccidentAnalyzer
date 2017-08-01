@@ -41,7 +41,7 @@ public class MicroBatchProcessor implements Runnable {
 		topics.add("accidents");
 		JavaPairInputDStream<String, String> lines = KafkaUtils.createDirectStream(this.streamingCont, String.class,
 				String.class, StringDecoder.class, StringDecoder.class, kafkaParams, topics);
-		JavaDStream<Accident> accidents = lines.window(Durations.seconds(60), Durations.seconds(30)).map(x -> {
+		JavaDStream<Accident> accidents = lines.window(Durations.seconds(1000/10), Durations.seconds(100/10)).map(x -> {
 			 ArrayList<String> elements = Lists.newArrayList(x._2.split(","));
 			 return new Accident(
 					 Integer.parseInt(elements.get(0)), 
@@ -83,6 +83,9 @@ public class MicroBatchProcessor implements Runnable {
 				String[] tmp = {Double.toString(accident.getLatitude()), Double.toString(accident.getLongitude())};
 				Database.addArrayToWindowData(tmp);
 				accident.printValues();
+				for(String s:tmp) {
+					System.out.println(s);
+				}
 			});
 			Database.setHeatMapData();
 		});
