@@ -74,7 +74,12 @@ public class MicroBatchProcessor implements Runnable {
 		
 		
 
-		accidents.print();
+		accidents.foreachRDD(rdd -> {
+			rdd.foreach(accident -> {
+				accident.printValues();
+			});
+		});
+		//accidents.print();
 		// a.map(atttribute -> new Accident(attribute));
 
 		/*
