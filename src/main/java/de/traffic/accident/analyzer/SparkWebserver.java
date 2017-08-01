@@ -5,6 +5,7 @@ import static spark.Spark.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.JsonElement;
 
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -19,8 +20,10 @@ public class SparkWebserver {
 		
 		 
 		 get("/index", (request, response) -> {
+			 	JsonElement numbAccidentsToBrand = Database.getNumbAccidentsToBrand();
 	            Map<String, Object> model = new HashMap<>();
-	            model.put("name", "World");
+	            model.put("numbAccidentsToBrand", numbAccidentsToBrand);
+	            
 	            
 	            return new ModelAndView(model, "public/index.vm");
 	        }, new VelocityTemplateEngine());
