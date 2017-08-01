@@ -30,6 +30,8 @@ public class Accident {
 	private int v2SecAgo = 0;
 	private int v1SecAgo = 0;
 	
+	private int accidentType = 0;
+	
 	
 	public Accident(int timestamp, double latitude, double longitude, String brand, String model, int constrYear,
 			String color, int passenger, Boolean abLeftFront, Boolean abRightFront, Boolean abLeftMid,
@@ -65,6 +67,39 @@ public class Accident {
 		this.v3SecAgo = v3SecAgo;
 		this.v2SecAgo = v2SecAgo;
 		this.v1SecAgo = v1SecAgo;
+	}
+	
+	public void printValues(){
+		System.out.println("ACCIDENT VALUES");
+		System.out.println("------------------------------");
+		System.out.println("Timestamp: " + this.timestamp);
+		System.out.println("Latitude: " + this.latitude);
+		System.out.println("Longitude: " + this.longitude);
+		System.out.println("Brand: " + this.brand);
+		System.out.println("Model: " + this.model);
+		System.out.println("Year of Construction: " + this.constrYear);
+		System.out.println("Color: " + this.color);
+		System.out.println("Number of passengers: " + this.passenger);
+		System.out.println("Airbag Status left front: " + this.abLeftFront);
+		System.out.println("Airbag Status right front: " + this.abRightFront);
+		System.out.println("Airbag Status left mid: " + this.abLeftMid);
+		System.out.println("Airbag Status right mid: " + this.abRightMid);
+		System.out.println("Tire Status left front: " + this.tireLeftFront);
+		System.out.println("Tire Status right front: " + this.tireRightFront);
+		System.out.println("Tire Status left rear: " + this.tireLeftRear);
+		System.out.println("Tire Status right rear: " + this.tireRightRear);
+		System.out.println("Window Status front: " + this.windowFront);
+		System.out.println("Window Status Left front: " + this.windowLeftFront);
+		System.out.println("Window Status Right front: " + this.windowRightFront);
+		System.out.println("Window Status Left rear: " + this.windowLeftRear);
+		System.out.println("Window Status Right rear: " + this.windowRightRear);
+		System.out.println("Window Status rear: " + this.windowRear);
+		System.out.println("Velocity 10 Seconds before accident: " + this.v10SecAgo);
+		System.out.println("Velocity 5 Seconds before accident: " + this.v5SecAgo);
+		System.out.println("Velocity 3 Seconds before accident: " + this.v3SecAgo);
+		System.out.println("Velocity 2 Seconds before accident: " + this.v2SecAgo);
+		System.out.println("Velocity 1 Second before accident: " + this.v1SecAgo);
+		System.out.println("------------------------------");
 	}
 
 
@@ -229,6 +264,12 @@ public class Accident {
 	}
 	public void setV1SecAgo(int v1SecAgo) {
 		this.v1SecAgo = v1SecAgo;
+	}
+	public int getAccidentType(){
+		return accidentType;
+	}
+	public void setAccidentType(int accidentType){
+		this.accidentType = accidentType;
 	}
 	
 	
