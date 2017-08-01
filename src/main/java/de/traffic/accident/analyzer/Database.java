@@ -7,6 +7,7 @@ public final class Database {
 	private static JsonElement NumbAccidentsToBrand = null;
 	private static JsonElement NumbAccidentsToYearOfCar = null;
 	private static JsonElement NumbAccidentsToNumbPasseger = null;
+	private static JsonElement NumbOfDiffAccidentType = null;
 	
 	
 	private Database() {
@@ -41,6 +42,16 @@ public final class Database {
 
 	public static void setNumbAccidentsToNumbPasseger(JsonElement numbAccidentsToNumbPasseger) {
 		NumbAccidentsToNumbPasseger = numbAccidentsToNumbPasseger;
+	}
+
+
+	public static JsonElement getNumbOfDiffAccidentType() {
+		return NumbOfDiffAccidentType;
+	}
+
+
+	public static void setNumbOfDiffAccidentType(JsonElement numbOfDiffAccidentType) {
+		NumbOfDiffAccidentType = numbOfDiffAccidentType;
 	}
 	
 	

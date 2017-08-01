@@ -49,8 +49,49 @@ public class BatchProcesser implements Runnable {
 		GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
 		
-		//Analyze number of accidents per brand
 		JavaRDD<Row> javaRDD = df.javaRDD();
+		//Analyze 
+		JavaRDD<Accident> accidentRDD = javaRDD.map(row -> {
+			return new Accident(
+					 row.getInt(0), 
+					 row.getDouble(1), 
+					 row.getDouble(2), 
+					 row.getString(3), 
+					 row.getString(4), 
+					 row.getInt(5), 
+					 row.getString(6), 
+					 row.getInt(7), 
+					 row.getBoolean(8), 
+					 row.getBoolean(9), 
+					 row.getBoolean(10), 
+					 row.getBoolean(11), 
+					 row.getBoolean(12), 
+					 row.getBoolean(13), 
+					 row.getBoolean(14), 
+					 row.getBoolean(15), 
+					 row.getBoolean(16), 
+					 row.getBoolean(17), 
+					 row.getBoolean(18), 
+					 row.getBoolean(19), 
+					 row.getBoolean(20), 
+					 row.getBoolean(21), 
+					 row.getInt(22), 
+					 row.getInt(23), 
+					 row.getInt(24),
+					 row.getInt(25),
+					 row.getInt(26));
+		});
+		//accidentRDD.foreach(accident -> {
+		//	App.analyzeAccident(accident);
+		//});
+		JavaPairRDD<AccidentType, Integer> accidentMap = accidentRDD.mapToPair(accident -> new Tuple2<>(App.analyzeAccident(accident), 1));
+		JavaPairRDD<AccidentType, Integer>reduceByAccidentType = accidentMap.reduceByKey((a, b) -> a + b);
+		reduceByAccidentType = reduceByAccidentType.sortByKey();
+		JsonElement jsonByAccidentType = gson.toJsonTree(reduceByAccidentType.collect());
+		Database.setNumbOfDiffAccidentType(jsonByAccidentType);
+		System.out.println(jsonByAccidentType);
+		
+		//Analyze number of accidents per brand
 		JavaPairRDD<String, Integer> brandMap = javaRDD.mapToPair(row -> new Tuple2<>(row.getString(3), 1));
 		reduceByBrand = brandMap.reduceByKey((a, b) -> a + b);
 		reduceByBrand = reduceByBrand.sortByKey();
