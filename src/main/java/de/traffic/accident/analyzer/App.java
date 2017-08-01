@@ -21,7 +21,6 @@ public class App {
 
 	final static JavaSparkContext sc = new JavaSparkContext(conf);
 
-
 	final static JavaStreamingContext ssc = new JavaStreamingContext(sc, Durations.seconds(10));
 
 	public static void main(String[] args) {
