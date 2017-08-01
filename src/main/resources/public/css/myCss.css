@@ -1,0 +1,26 @@
+body {
+	width: 100%;
+}
+
+.mapContainer {
+	position: absolute;
+	border: 1px solid black;
+	width: 30%;
+	height: 30%;
+	top: 0;
+	left: 0;
+}
+
+.diagram2Container {
+	position: absolute;
+	border: 1px solid black;
+	right: 0;
+	top: 0;
+}
+
+.diagram3Container {
+	position: absolute;
+	border: 1px solid black;
+	left: 0;
+	bottom: 0;
+}

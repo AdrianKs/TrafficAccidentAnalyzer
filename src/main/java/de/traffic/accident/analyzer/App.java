@@ -34,7 +34,7 @@ public class App
     
     public App(){
     	Logging.setLoggingDefaults();
-    	//sparkServer = new SparkWebserver();
+    	sparkServer = new SparkWebserver();
 		
     	
     	
