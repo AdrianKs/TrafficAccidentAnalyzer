@@ -51,9 +51,15 @@ public class App
     	
     	
     	threadBatchProcessor.start();
-    	//threadMicroBatchProcessor.start();
-    	//threadSampleDataProducer.start();
+    	threadMicroBatchProcessor.start();
+    	threadSampleDataProducer.start();
     	
     	
+    }
+    
+    public static int calcAccident(boolean abLeftFront, boolean abRigrhtFront, boolean abLeftMid, boolean abRightMid, boolean tireLeftFront, boolean tireRightFront, boolean tireLeftRear, boolean tireRightRear) {
+    	
+    	
+    	return 1;
     }
 }
