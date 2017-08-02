@@ -109,8 +109,8 @@ public class BatchProcesser implements Runnable {
 		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster5 = velToAccTypeToNumb.filter(t -> t._1().equals("121-150"));
 		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster6 = velToAccTypeToNumb.filter(t -> t._1().equals("151-180"));
 		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster7 = velToAccTypeToNumb.filter(t -> t._1().equals("181-210"));
-		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster8 = velToAccTypeToNumb.filter(t -> t._1().equals("211-240"));
-		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster9 = velToAccTypeToNumb.filter(t -> t._1().equals(">240"));
+		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster8 = velToAccTypeToNumb.filter(t -> t._1().equals(">210"));
+		//JavaRDD<Tuple3<String, AccidentType, Integer>> cluster9 = velToAccTypeToNumb.filter(t -> t._1().equals(">240"));
 		clusterRDD.add(cluster1);
 		clusterRDD.add(cluster2);
 		clusterRDD.add(cluster3);
@@ -119,7 +119,7 @@ public class BatchProcesser implements Runnable {
 		clusterRDD.add(cluster6);
 		clusterRDD.add(cluster7);
 		clusterRDD.add(cluster8);
-		clusterRDD.add(cluster9);
+		//clusterRDD.add(cluster9);
 		
 		for(JavaRDD<Tuple3<String, AccidentType, Integer>> cl : clusterRDD) {
 			clusterData.add(gson.toJson(cl.mapToPair(row -> new Tuple2<>(row._2(), row._3()))
@@ -183,11 +183,11 @@ public class BatchProcesser implements Runnable {
 		else if(average <= 210) {
 			return "181-210";
 		}
-		else if(average <= 240) {
-			return "211-240";
-		}
+//		else if(average <= 240) {
+//			return "211-240";
+//		}
 		else {
-			return ">240";
+			return ">210";
 		}
 	}
 	
