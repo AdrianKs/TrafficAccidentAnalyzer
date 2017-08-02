@@ -21,27 +21,6 @@
 		<div class="svgContainer" id="svgContainer">
 		
 		</div>
-		
-		<!--<div class="diagram1Container">
-			<p>Number of Accidents to Year of Car<p>
-			<div id="dia1"></div>
-		</div>
-		<div class="diagram2Container">
-			<p>Number of Accidents by Type<p>
-			<div id="dia2"></div>
-		</div>
-		<div class="diagram3Container">
-			<p>Number of Accidents to Number of Passengers<p>
-			<div id="dia4"></div>
-		</div>
-		<div class="diagram4Container">
-			<p>Number of Accidents to Brand of Car<p>
-			<div id="dia3"></div>
-		</div>
-		<div class="diagram5Container">
-			<p>Beba Diagram<p>
-			<div id="dia5"></div>
-		</div>-->
 	</div>
 
 
@@ -440,6 +419,174 @@ var data = ${numbAccidentsToNumbPasseger}
 
 //});
 
+</script>
+
+<script>
+    var margin = {top: 20, right: 20, bottom: 70, left: 40},
+        width = 1000 - margin.left - margin.right,
+        height = 800 - margin.top - margin.bottom;
+        
+    var dataset = ${numbAccidentToVelocityToAccidentType}
+    
+	//var newDataset = [];
+	//var sortedData = [[]];
+   		
+	/**for (var i = 0; i < dataset.length; i++) {
+	    newDataset[0] = dataset[i][1];
+	    newDataset[1] = dataset[i][2];
+	    newDataset[2] = dataset[i][6];
+	    newDataset[3] = dataset[i][4];
+	    newDataset[4] = dataset[i][0];
+	    newDataset[5] = dataset[i][3];
+	    newDataset[6] = dataset[i][5];
+	  
+	    dataset[i] = newDataset;
+	}**/
+	
+	//console.log(sortedData[0]);
+	//console.log(dataset[0]);
+	
+	dataset.forEach(function (d) {
+        d.forEach(function (d){
+            d.y = d._2;
+            delete d._2;
+        });
+    });
+
+    //Set up stack method
+    var stack = d3.layout.stack();
+    //Data, stacked
+    stack(dataset);
+
+    var color_hash = {
+        0: ["0 - 30km/h", "#00aedb"],
+        1: ["30 - 60km/h", "#f47835"],
+        2: ["60 - 90km/h", "#00ff00"],
+        3: ["90 - 120km/h", "#a200ff"],
+        4: ["120 - 150km/h", "#d41243"],
+        5: ["150 - 180km/h", "#0000ff"],
+        6: ["180 - 210km/h", "#008000"],
+        7: [">210km/h", "#ee1289"]
+    };
+
+    var scales = dataset[0];
+
+    //Set up scales
+    var xScale = d3.scale.ordinal()
+        .rangeRoundBands([0, width], .4);
+
+    xScale.domain(scales.map(function (d) {
+        return d._1;
+    }));
+
+    var yScale = d3.scale.linear()
+        .domain([0,
+            d3.max(dataset, function (d) {
+                return d3.max(d, function (d) {
+                    return d.y0 + d.y;
+                });
+            })
+        ])
+        .range([height - margin.bottom - margin.top, 0]);
+
+    var xAxis = d3.svg.axis()
+        .scale(xScale)
+        .orient("bottom");
+
+    var yAxis = d3.svg.axis()
+        .scale(yScale)
+        .orient("left")
+        .ticks(10);
+
+
+    //Easy colors accessible via a 10-step ordinal scale
+    //    var colors = d3.scale.category10();
+
+    //Create SVG element
+    var svg = d3.select("#svgContainer")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    // Add a group for each row of data
+    var groups = svg.selectAll("g")
+        .data(dataset)
+        .enter()
+        .append("g")
+        .attr("class", "rgroups")
+        .attr("transform", "translate(" + margin.left + "," + (height - margin.bottom) + ")")
+        .style("fill", function (d, i) {
+            return color_hash[dataset.indexOf(d)][1];
+        });
+
+    // Add a rect for each data value
+    var rects = groups.selectAll("rect")
+        .data(function (d) {
+            return d;
+        })
+        .enter()
+        .append("rect")
+        .attr("width", 2)
+        .style("fill-opacity", 1e-6);
+
+
+    rects.transition()
+        .duration(function (d, i) {
+            return 500 * i;
+        })
+        .ease("linear")
+        .attr("x", function (d) {
+            return xScale(d._1);
+        })
+        .attr("y", function (d) {
+            return -(-yScale(d.y0) - yScale(d.y) + (height - margin.top - margin.bottom) * 2);
+        })
+        .attr("height", function (d) {
+            return -yScale(d.y) + (height - margin.top - margin.bottom);
+        })
+        .attr("width", xScale.rangeBand())
+        .style("fill-opacity", 1);
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(40," + (height - margin.bottom) + ")")
+        .call(xAxis);
+
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .call(yAxis);
+
+    // adding legend
+
+    var legend = svg.append("g")
+        .attr("class", "legend")
+        .attr("x", width - margin.right - 65)
+        .attr("y", 25)
+        .attr("height", 100)
+        .attr("width", 100);
+
+    legend.selectAll("g").data(dataset)
+        .enter()
+        .append('g')
+        .each(function (d, i) {
+            var g = d3.select(this);
+            g.append("rect")
+                .attr("x", width - margin.right - 65)
+                .attr("y", i * 25 + 10)
+                .attr("width", 10)
+                .attr("height", 10)
+                .style("fill", color_hash[String(i)][1]);
+
+            g.append("text")
+                .attr("x", width - margin.right - 50)
+                .attr("y", i * 25 + 20)
+                .attr("height", 30)
+                .attr("width", 100)
+                .style("fill", color_hash[String(i)][1])
+                .text(color_hash[String(i)][0]);
+        });
 </script>
 
 </body>
