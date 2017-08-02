@@ -6,52 +6,38 @@
    <script src="../js/app.js" type="text/javascript"></script>
    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
    <script src="//d3js.org/d3.v3.min.js"></script>
-   <script src="realworldpoints.js" type="text/javascript"></script>
-   <script src="leaflet-heat.js" type="text/javascript"></script>
-    <style>
-        body { font: 16px/1.4 "Helvetica Neue", Arial, sans-serif; }
-        .ghbtns { position: relative; top: 4px; margin-left: 5px; }
-        a { color: #0077ff; }
-	      .bar{
-		    fill: steelblue;
-		  }
-		
-		  .bar:hover{
-		    fill: brown;
-		  }
-		.axis {
-		  font: 10px sans-serif;
-		}
-	
-		.axis path,
-		.axis line {
-		  fill: none;
-		  stroke: #000;
-		  shape-rendering: crispEdges;
-		}
-    </style
    <meta charset="UTF-8"></meta>
-   <title>Hello world</title>
+   <title>Traffic Accident Analyzer</title>
 </head>
 <body>
+	<div class="myHeader">
+	    <h1>Traffic Accident Analyzer</h1>
+	    <p></p>
+	</div>
 	<div class="container">
 		<div class="mapContainer">
 			<div id="map"></div>
 		</div>
-		
 		<div class="diagram1Container">
 			<p>Number of Accidents to Year of Car<p>
 			<div id="dia1"></div>
+		</div>
+		<div class="diagram2Container">
 			<p>Number of Accidents by Type<p>
 			<div id="dia2"></div>
 		</div>
 		<div class="diagram3Container">
-			<p>Number of Accidents to Brand of Car<p>
-			<div id="dia3"></div>
 			<p>Number of Accidents to Number of Passengers<p>
 			<div id="dia4"></div>
 		</div>
-		
+		<div class="diagram4Container">
+			<p>Number of Accidents to Brand of Car<p>
+			<div id="dia3"></div>
+		</div>
+		<div class="diagram5Container">
+			<p>Beba Diagram<p>
+			<div id="dia5"></div>
+		</div>
 	</div>
 
 
@@ -79,7 +65,7 @@
 <script>
 // set the dimensions of the canvas
 var margin = {top: 20, right: 20, bottom: 70, left: 40},
-    width = 800 - margin.left - margin.right,
+   	width = 800 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 
@@ -101,18 +87,21 @@ var yAxis = d3.svg.axis()
 
 
 // add the SVG element
-var svg = d3.select("#dia1").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", 
-          "translate(" + margin.left + "," + margin.top + ")");
+var svg = d3.select("#dia1")
+	.append("div")
+	.classed("svg-container", true) 
+	.append("svg")
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 600 400")
+   //class to make it responsive
+   	.classed("svg-content-responsive", true);
+  
 
 // load the data
 //var data = [{"Letter": "A","Freq": 20},{"Letter" : "B","Freq": 12}]
 //var data = [{"_1":"Audi","_2":528},{"_1":"BMW","_2":556}]
 //var data = [{"Letter":"Audi","Freq":528},{"Letter":"BMW","Freq":556}]
-var data = ${numbAccidentsToBrand}
+var data = ${numbAccidentsToBrand};
 
 
 //d3.json(jsonObject, function(error, data) {
@@ -162,6 +151,7 @@ var data = ${numbAccidentsToBrand}
 
 //});
 
+
 </script>
 
 <script>
@@ -190,11 +180,13 @@ var yAxis = d3.svg.axis()
 
 // add the SVG element
 var svg = d3.select("#dia2").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", 
-          "translate(" + margin.left + "," + margin.top + ")");
+   	.append("div")
+	.classed("svg-container", true) 
+	.append("svg")
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 600 400")
+   //class to make it responsive
+   	.classed("svg-content-responsive", true);
 
 // load the data
 //var data = [{"Letter": "A","Freq": 20},{"Letter" : "B","Freq": 12}]
@@ -278,11 +270,13 @@ var yAxis = d3.svg.axis()
 
 // add the SVG element
 var svg = d3.select("#dia3").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", 
-          "translate(" + margin.left + "," + margin.top + ")");
+    .append("div")
+	.classed("svg-container", true) 
+	.append("svg")
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 600 400")
+   //class to make it responsive
+   	.classed("svg-content-responsive", true);
 
 // load the data
 var data = ${numbAccidentsToYearOfCar}
@@ -361,11 +355,13 @@ var yAxis = d3.svg.axis()
 
 // add the SVG element
 var svg = d3.select("#dia4").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", 
-          "translate(" + margin.left + "," + margin.top + ")");
+   	.append("div")
+	.classed("svg-container", true) 
+	.append("svg")
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 600 400")
+   //class to make it responsive
+   	.classed("svg-content-responsive", true);
 
 // load the data
 var data = ${numbAccidentsToNumbPasseger}
