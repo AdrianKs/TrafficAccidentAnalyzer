@@ -12,7 +12,8 @@
 </head>
 <body>
 	<div class="myHeader">
-	    <h1>Traffic Accident Analyzer</h1>
+		<img src="image/logo.jpg" alt="Smiley face" height="70" width="70">
+	    <h1>TAA - Traffic Accident Analyzer</h1>
 	    <p></p>
 	</div>
 	<div class="container" id="container">
@@ -450,7 +451,7 @@ var data = ${numbAccidentsToNumbPasseger}
 
 <script>
     var margin = {top: 60, right: 20, bottom: 70, left: 40},
-        width = 900 - margin.left - margin.right,
+        width = 950 - margin.left - margin.right,
         height = 650 - margin.top - margin.bottom;
         
     var dataset = ${numbAccidentToVelocityToAccidentType}
