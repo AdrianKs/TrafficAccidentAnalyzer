@@ -422,9 +422,9 @@ var data = ${numbAccidentsToNumbPasseger}
 </script>
 
 <script>
-    var margin = {top: 20, right: 20, bottom: 70, left: 40},
-        width = 1000 - margin.left - margin.right,
-        height = 800 - margin.top - margin.bottom;
+    var margin = {top: 60, right: 20, bottom: 70, left: 40},
+        width = 900 - margin.left - margin.right,
+        height = 650 - margin.top - margin.bottom;
         
     var dataset = ${numbAccidentToVelocityToAccidentType}
     
@@ -507,6 +507,7 @@ var data = ${numbAccidentsToNumbPasseger}
         .append("svg")
         .attr("width", width)
         .attr("height", height);
+                
 
     // Add a group for each row of data
     var groups = svg.selectAll("g")
@@ -557,15 +558,24 @@ var data = ${numbAccidentsToNumbPasseger}
         .attr("class", "y axis")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         .call(yAxis);
+        
+        
+                        svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 + (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "24px") 
+        .style("text-decoration", "")  
+        .text("Number of accidents by type by velocity");
 
     // adding legend
 
     var legend = svg.append("g")
         .attr("class", "legend")
-        .attr("x", width - margin.right - 65)
+        .attr("x", width - margin.right - 105)
         .attr("y", 25)
         .attr("height", 100)
-        .attr("width", 100);
+        .attr("width", 150);
 
     legend.selectAll("g").data(dataset)
         .enter()
@@ -573,19 +583,21 @@ var data = ${numbAccidentsToNumbPasseger}
         .each(function (d, i) {
             var g = d3.select(this);
             g.append("rect")
-                .attr("x", width - margin.right - 65)
+                .attr("x", width - margin.right - 105)
                 .attr("y", i * 25 + 10)
                 .attr("width", 10)
                 .attr("height", 10)
                 .style("fill", color_hash[String(i)][1]);
 
             g.append("text")
-                .attr("x", width - margin.right - 50)
+                .attr("x", width - margin.right - 90)
                 .attr("y", i * 25 + 20)
                 .attr("height", 30)
-                .attr("width", 100)
+                .attr("width", 120)
                 .style("fill", color_hash[String(i)][1])
                 .text(color_hash[String(i)][0]);
+                
+      
         });
 </script>
 
