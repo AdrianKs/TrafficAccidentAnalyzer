@@ -1,5 +1,7 @@
 package de.traffic.accident.analyzer;
 
+import java.util.ArrayList;
+
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -7,14 +9,11 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SQLContext;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
-import com.sun.xml.bind.v2.schemagen.xmlschema.Any;
-
-import de.uniluebeck.itm.util.logging.Logging;
 import scala.Tuple2;
+import scala.Tuple3;
 
 public class BatchProcesser implements Runnable {
 	
@@ -28,6 +27,9 @@ public class BatchProcesser implements Runnable {
 	private SparkConf conf = null;
 	private JavaSparkContext sc = null;
 	private SQLContext sqlContext = null;
+	
+	private static ArrayList<String> clusterData = new ArrayList<>();
+	private static ArrayList<JavaRDD<Tuple3<String, AccidentType, Integer>>> clusterRDD = new ArrayList<>();
 	
 	
 	public BatchProcesser(JavaSparkContext jsContext) {
@@ -81,15 +83,11 @@ public class BatchProcesser implements Runnable {
 					 row.getInt(25),
 					 row.getInt(26));
 		});
-		//accidentRDD.foreach(accident -> {
-		//	App.analyzeAccident(accident);
-		//});
 		JavaPairRDD<AccidentType, Integer> accidentMap = accidentRDD.mapToPair(accident -> new Tuple2<>(App.analyzeAccident(accident), 1));
 		JavaPairRDD<AccidentType, Integer>reduceByAccidentType = accidentMap.reduceByKey((a, b) -> a + b);
 		reduceByAccidentType = reduceByAccidentType.sortByKey();
 		JsonElement jsonByAccidentType = gson.toJsonTree(reduceByAccidentType.collect());
 		Database.setNumbOfDiffAccidentType(jsonByAccidentType);
-		System.out.println(jsonByAccidentType);
 		
 		
 		//Analyze number of accidents per velocity (v10, v5)
@@ -98,7 +96,37 @@ public class BatchProcesser implements Runnable {
 		reduceByVelocity = reduceByVelocity.sortByKey();
 		JsonElement jsonByVelocity = gson.toJsonTree(reduceByVelocity.collect());
 		Database.setNumbAccidentsToVelocity(jsonByVelocity);
-		System.out.println(jsonByVelocity);
+		
+		
+		//Analyze number of accidents per velocity per accidenttype
+		JavaRDD<Tuple3<String, AccidentType, Integer>> velToAccTypeToNumb = accidentRDD.map(accident -> {
+			return new Tuple3<>(calculateVelocityCluster(accident.getV5SecAgo(), accident.getV10SecAgo()), App.analyzeAccident(accident),  1);
+		});
+		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster1 = velToAccTypeToNumb.filter(t -> t._1().equals("0-30"));
+		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster2 = velToAccTypeToNumb.filter(t -> t._1().equals("31-60"));
+		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster3 = velToAccTypeToNumb.filter(t -> t._1().equals("61-90"));
+		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster4 = velToAccTypeToNumb.filter(t -> t._1().equals("91-120"));
+		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster5 = velToAccTypeToNumb.filter(t -> t._1().equals("121-150"));
+		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster6 = velToAccTypeToNumb.filter(t -> t._1().equals("151-180"));
+		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster7 = velToAccTypeToNumb.filter(t -> t._1().equals("181-210"));
+		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster8 = velToAccTypeToNumb.filter(t -> t._1().equals("211-240"));
+		JavaRDD<Tuple3<String, AccidentType, Integer>> cluster9 = velToAccTypeToNumb.filter(t -> t._1().equals(">240"));
+		clusterRDD.add(cluster1);
+		clusterRDD.add(cluster2);
+		clusterRDD.add(cluster3);
+		clusterRDD.add(cluster4);
+		clusterRDD.add(cluster5);
+		clusterRDD.add(cluster6);
+		clusterRDD.add(cluster7);
+		clusterRDD.add(cluster8);
+		clusterRDD.add(cluster9);
+		
+		for(JavaRDD<Tuple3<String, AccidentType, Integer>> cl : clusterRDD) {
+			clusterData.add(gson.toJson(cl.mapToPair(row -> new Tuple2<>(row._2(), row._3()))
+			.reduceByKey((a,b) -> a+b).collect()));
+		}
+		Database.setNumbAccidentToVelocityToAccidentType(createDataString(clusterData));
+		
 		
 		//Analyze number of accidents per brand
 		JavaPairRDD<String, Integer> brandMap = javaRDD.mapToPair(row -> new Tuple2<>(row.getString(3), 1));
@@ -121,14 +149,14 @@ public class BatchProcesser implements Runnable {
       	jsonByPassenger = gson.toJsonTree(reduceByPassenger.collect());
       	Database.setNumbAccidentsToNumbPasseger(jsonByPassenger);
         
-        System.out.println("Accidents per Brand");
-        printDataString(reduceByBrand);
-        System.out.println("Accidents per Age of Car");
-        printDataInteger(reduceByAge);
-        System.out.println("Accidents per passengers in car");
-        printDataInteger(reduceByPassenger);
-        System.out.println("Accidents Velocity");
-        printDataString(reduceByVelocity);
+//        System.out.println("Accidents per Brand");
+//        printDataString(reduceByBrand);
+//        System.out.println("Accidents per Age of Car");
+//        printDataInteger(reduceByAge);
+//        System.out.println("Accidents per passengers in car");
+//        printDataInteger(reduceByPassenger);
+//        System.out.println("Accidents Velocity");
+//        printDataString(reduceByVelocity);
 	}
 	
 	
@@ -155,11 +183,11 @@ public class BatchProcesser implements Runnable {
 		else if(average <= 210) {
 			return "181-210";
 		}
-		else if(average <= 250) {
-			return "211-250";
+		else if(average <= 240) {
+			return "211-240";
 		}
 		else {
-			return ">250";
+			return ">240";
 		}
 	}
 	
@@ -173,6 +201,19 @@ public class BatchProcesser implements Runnable {
 		for(Tuple2 t: data.collect()) {
 			System.out.println(t._1 + ": " + t._2);
 		}
+	}
+	
+	private static String createDataString(ArrayList<String> data) {
+		String s = "[";
+		for (int i = 0; i < data.size(); i++) {
+			s += data.get(i);
+			if(i<data.size()-1) {
+				s+=",";
+			}
+		}
+		s+="]";
+		//System.out.println(s);
+		return s;
 	}
 	
 	
