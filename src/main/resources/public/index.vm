@@ -68,7 +68,7 @@
 
 <script>
 // set the dimensions of the canvas
-var margin = {top: 20, right: 20, bottom: 70, left: 40},
+var margin = {top: 60, right: 20, bottom: 70, left: 40},
   	width = 800 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
@@ -101,11 +101,11 @@ var svg = d3.select("#svgContainer").append("svg")
  
 svg.append("text")
         .attr("x", (width / 2))             
-        .attr("y", 0 - (0))
+        .attr("y", 0 - (margin.top / 2))
         .attr("text-anchor", "middle")  
         .style("font-size", "24px") 
         .style("text-decoration", "")  
-        .text("Number of Accidents to Year of Car");
+        .text("Number of accidents to brand of car");
         
 // load the data
 //var data = [{"Letter": "A","Freq": 20},{"Letter" : "B","Freq": 12}]
@@ -166,7 +166,7 @@ var data = ${numbAccidentsToBrand};
 
 <script>
 // set the dimensions of the canvas
-var margin = {top: 20, right: 20, bottom: 70, left: 40},
+var margin = {top: 60, right: 20, bottom: 100, left: 40},
     width = 800 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
@@ -195,6 +195,14 @@ var svg = d3.select("#svgContainer").append("svg")
   .append("g")
     .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
+          
+svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "24px") 
+        .style("text-decoration", "")  
+        .text("Number of accidents by type");
 
 // load the data
 //var data = [{"Letter": "A","Freq": 20},{"Letter" : "B","Freq": 12}]
@@ -254,7 +262,7 @@ var data = ${numbOfDiffAccidentType}
 
 <script>
 // set the dimensions of the canvas
-var margin = {top: 20, right: 20, bottom: 70, left: 40},
+var margin = {top: 60, right: 20, bottom: 70, left: 40},
     width = 800 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
@@ -283,6 +291,14 @@ var svg = d3.select("#svgContainer").append("svg")
   .append("g")
     .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
+          
+svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "24px") 
+        .style("text-decoration", "")  
+        .text("Number of accidents by construction-year of car");
 
 // load the data
 var data = ${numbAccidentsToYearOfCar}
@@ -337,7 +353,7 @@ var data = ${numbAccidentsToYearOfCar}
 
 <script>
 // set the dimensions of the canvas
-var margin = {top: 20, right: 20, bottom: 70, left: 40},
+var margin = {top: 60, right: 20, bottom: 70, left: 40},
     width = 800 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
@@ -366,6 +382,14 @@ var svg = d3.select("#svgContainer").append("svg")
   .append("g")
     .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
+          
+svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "24px") 
+        .style("text-decoration", "")  
+        .text("Number of accidents by passengers");
 
 // load the data
 var data = ${numbAccidentsToNumbPasseger}
