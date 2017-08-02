@@ -29,8 +29,6 @@ public class SparkWebserver {
 		get("/s3", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("ap", Database.getHeatMapDataAsString());
-            
-            
             return new ModelAndView(model, "public/index.vm");
         }, new VelocityTemplateEngine());
 		
@@ -48,6 +46,7 @@ public class SparkWebserver {
 			 	JsonElement numbAccidentsToNumbPasseger = Database.getNumbAccidentsToNumbPasseger();
 			 	JsonElement numbOfDiffAccidentType = Database.getNumbOfDiffAccidentType();
 	            Map<String, Object> model = new HashMap<>();
+	            model.put("ap", Database.getHeatMapDataAsString());
 	            model.put("numbAccidentsToBrand", numbAccidentsToBrand);
 	            model.put("numbAccidentsToYearOfCar", numbAccidentsToYearOfCar);
 	            model.put("numbAccidentsToNumbPasseger", numbAccidentsToNumbPasseger);
