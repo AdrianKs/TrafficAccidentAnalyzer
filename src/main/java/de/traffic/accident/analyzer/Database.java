@@ -1,9 +1,12 @@
 package de.traffic.accident.analyzer;
 
+import java.util.ArrayList;
+
 import com.google.gson.JsonElement;
 
 public final class Database {
 
+	private static ArrayList<String[]> WindowData = new ArrayList<String[]>();
 	private static JsonElement NumbAccidentsToBrand = null;
 	private static JsonElement NumbAccidentsToYearOfCar = null;
 	private static JsonElement NumbAccidentsToNumbPasseger = null;
@@ -55,7 +58,31 @@ public final class Database {
 		NumbOfDiffAccidentType = numbOfDiffAccidentType;
 	}
 
+	public static ArrayList<String[]> getWindowData() {
+		return WindowData;
+	}
 
+
+	public static void setWindowData(ArrayList<String[]> windowData) {
+		WindowData = windowData;
+	}
+	
+	public static void addArrayToWindowData(String[] array){
+		WindowData.add(array);
+	}
+	
+	public static String getHeatMapDataAsString() {
+		String s = "[";
+		for (int i = 0; i < WindowData.size(); i++) {
+			s += "[" + WindowData.get(i)[0] + ", " + WindowData.get(i)[1] + "]";
+			if(i<WindowData.size()-1) {
+				s+=",";
+			}
+		}
+		s += "]";
+		return s;
+	}
+	
 	public static JsonElement getNumbAccidentsToVelocity() {
 		return NumbAccidentsToVelocity;
 	}
@@ -64,6 +91,5 @@ public final class Database {
 	public static void setNumbAccidentsToVelocity(JsonElement numbAccidentsToVelocity) {
 		NumbAccidentsToVelocity = numbAccidentsToVelocity;
 	}
-	
 	
 }

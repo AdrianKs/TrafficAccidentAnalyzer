@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.spark.SparkConf;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaPairInputDStream;
@@ -15,14 +14,13 @@ import org.apache.spark.streaming.kafka.KafkaUtils;
 import com.google.common.collect.Lists;
 
 import kafka.serializer.StringDecoder;
-import scala.Tuple2;
-import scala.tools.scalap.scalax.rules.scalasig.SymbolInfoSymbol;
 
 public class MicroBatchProcessor implements Runnable {
 
-	SparkConf sparkContext = null;
-	JavaStreamingContext streamingCont = null;
-	HashMap<String, String> kafkaParams = null;
+
+	private JavaStreamingContext streamingCont = null;
+	private HashMap<String, String> kafkaParams = null;
+	private ArrayList<String[]> emptyList = new ArrayList<String[]>();
 
 	public MicroBatchProcessor(JavaStreamingContext jsContext) {
 
@@ -40,7 +38,7 @@ public class MicroBatchProcessor implements Runnable {
 		topics.add("accidents");
 		JavaPairInputDStream<String, String> lines = KafkaUtils.createDirectStream(this.streamingCont, String.class,
 				String.class, StringDecoder.class, StringDecoder.class, kafkaParams, topics);
-		JavaDStream<Accident> accidents = lines.window(Durations.seconds(120), Durations.seconds(60)).map(x -> {
+		JavaDStream<Accident> accidents = lines.window(Durations.seconds(1000/10), Durations.seconds(100/10)).map(x -> {
 			 ArrayList<String> elements = Lists.newArrayList(x._2.split(","));
 			 return new Accident(
 					 Integer.parseInt(elements.get(0)), 
@@ -75,25 +73,22 @@ public class MicroBatchProcessor implements Runnable {
 		
 		
 		
-//		accidents.foreachRDD(rdd -> {
-//			System.out.println("RDD LENGTH: " + Long.toString((rdd.count())));
-//			rdd.foreach(accident -> {
-//				accident.printValues();
-//			});
-//		});
+		accidents.foreachRDD(rdd -> {
+			emptyList.removeAll(emptyList);
+			Database.setWindowData(emptyList);
+			rdd.foreach(accident -> {
+				String[] tmp = {Double.toString(accident.getLatitude()), Double.toString(accident.getLongitude())};
+				Database.addArrayToWindowData(tmp);
+				accident.printValues();
+			});
+		});
 		
-		//accidents.print();
-		// a.map(atttribute -> new Accident(attribute));
-
-		/*
-		 * for(Tuple2 t: data.collect()) { System.out.println(t._1 + ": " + t._2); }
-		 */
-
 		this.streamingCont.start();
 
 		this.streamingCont.awaitTermination();
 		this.streamingCont.close();
 
 	}
+	
 
 }
