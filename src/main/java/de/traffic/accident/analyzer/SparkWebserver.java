@@ -23,16 +23,15 @@ public class SparkWebserver {
 		get("/s2", (request, response) -> {
 		 	//JsonElement numbAccidentsToBrand = Database.getNumbAccidentsToBrand();
             Map<String, Object> model = new HashMap<>();
-            model.put("test", Database.getString());
+            model.put("test", Database.getHeatMapDataAsString());
             
             
             return new ModelAndView(model, "public/index_test.vm");
         }, new VelocityTemplateEngine());
 		
 		get("/s3", (request, response) -> {
-		 	//JsonElement numbAccidentsToBrand = Database.getNumbAccidentsToBrand();
             Map<String, Object> model = new HashMap<>();
-            model.put("ap", Database.getString());
+            model.put("ap", Database.getHeatMapDataAsString());
             
             
             return new ModelAndView(model, "public/index.vm");

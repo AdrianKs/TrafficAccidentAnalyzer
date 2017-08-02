@@ -82,7 +82,7 @@ public final class Database {
 		//SparkWebserver.setNewAccidentData(WindowData);
 	}
 	
-	public static String getString() {
+	public static String getHeatMapDataAsString() {
 		String s = "[";
 		for (int i = 0; i < WindowData.size(); i++) {
 			s += "[" + WindowData.get(i)[0] + ", " + WindowData.get(i)[1] + "]";
