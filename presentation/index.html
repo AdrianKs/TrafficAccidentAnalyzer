@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Traffic Accident Analyzer</title>
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
+	<link rel="stylesheet" href="css/myStyle.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<div class="my-header">
+					<img src="images/d-logo.png" height="200" width="200" style="border: 0; background-color: #000">
+					<!--<h1>TAA</h1>
+					<p>Traffic Accident Analyzer</P>-->
+					<h1>Traffic Accident Analyzer</h1>
+				</div>
+				<div class="my-footer">
+					<p>Manuel Entenmann, Lucas Groß-Hardt, André Ho, Jan Kipka, Adrian Kochsiek und Sebastian Röhling</p>
+					<p>WWI14SEB</p>
+				</div>
+			</section>
+			<section>
+				<div class="my-headline">
+					<h2>Agenda</h2>
+				</div>
+				<div class="my-content">
+					<ol>
+						<li>Was wurde entwickelt?</li>
+						<li>Warum?</li>
+						<li>Wie wurde es entwickelt?</li>
+						<li>Ergebnis</li>
+						<li>Produktvideo</li>
+					</ol>
+				</div>
+			</section>
+			<section>
+				<div class="my-headline">
+					<h2>Was wurde entwickelt?</h2>
+				</div>
+				<div class="my-content">
+					<div class="my-text">
+						<p>Es wurde eine Browseranwendung entwickelt, welche bei Verkehrsunfällen Daten von diversen in Automobilen installierten Sensoren
+							empfängt. Diese Daten werden ausgewertet und klassifiziert. Dabei werden Zusammenhänge zwischen etwa dem Baujahr des
+							Fahrzeugs und der Unfallhäufigkeit oder dem Hersteller und der Unfallhäufigkeit erschlossen und anschließend in Informationsgraphen
+							dargestellt.
+						</p>
+						<img src="images/platform.PNG" style="border: 0; background-color: #000">
+					</div>
+				</div>
+			</section>
+			<section>
+				<div class="my-headline">
+					<h2>Warum?</h2>
+				</div>
+				<div class="my-content">
+					<div class="my-text">
+						<p>Die Anwendung soll die Möglichkeit bieten, schnelle Aussagen zu Natur und Schwere von Unfällen zu treffen. Durch den
+							Traffic Accident Analyzer soll festgestellt werden, unter welchen Umständen die meisten Unfälle entstehen, um zukünftig
+							eine bessere Prävention zu ermöglichen. Außerdem können die Daten dem Notdienst als vorläufige Informationen dienen,
+							um sich noch vor dem Eintreffen ein grobes Bild der Lage zu verschaffen.
+						</p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<section>
+					<div class="my-headline">
+						<h2>Wie wurde es entwickelt?</h2>
+					</div>
+					<div class="my-second-headline">
+						<h5>Grundlegende Technologie:</h5>
+					</div>
+					<div class="my-content">
+						<img src="images/log.PNG" style="border: 0; background-color: #000">
+					</div>
+				</section>
+				<section>
+					<div class="my-content">
+						<ul>
+							<li class="my-list-header">Java als Basis der App</li>
+							<ul>
+								<div class="my-points">
+									<li>Entwicklung der App als Webapplication</li>
+									<li>Entwicklung der Komponenten mit: HTML5, CSS und Javacode</li>
+								</div>
+							</ul>
+							<li class="my-list-header">Spark als Datenübertragungsservice</li>
+							<ul>
+								<div class="my-points">
+									<li></li>
+								</div>
+							</ul>
+							<li class="my-list-header">Kafka als Datenspeicherungstechnologie</li>
+							<ul>
+								<div class="my-points">
+									<li>Viel verwendetes und stark kompatibles Framework</li>
+								</div>
+							</ul>
+							<li class="my-list-header">Python als Basis für Datenerstellung</li>
+							<ul>
+								<div class="my-points">
+									<li>Erstellung eines Skripts für die Kombination von Testdaten zu Historiensätzen</li>
+								</div>
+							</ul>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<div class="my-second-headline">
+						<h5>Verwendete Plugins:</h5>
+					</div>
+					<div class="my-content">
+						<table class="my-table">
+							<tr>
+								<div class="my-table-header">
+									<th>Plugins</th>
+									<th>Funktion in der App</th>
+								</div>
+							</tr>
+								<td>Leafleat</td>
+								<td>
+									<p>Ermöglicht das Anzeigen einer Heatmap zur Darstellung der am häufigsten von Unfällen
+										betroffenen Regionen und Orte.
+									</p>
+								</td>
+							</tr>
+							</tr>
+								<td>d3.js</td>
+								<td>
+									<p>Ermöglicht das Anzeigen von Diagrammen zur Darstellung der erschlossenen Zusammenhänge.</p>
+								</td>
+							</tr>
+							
+						</table>
+					</div>
+				</section>
+			</section>
+			<section>
+				<section>
+					<div class="my-headline">
+						<h2>Ergebnis</h2>
+					</div>
+					<div class="my-content">
+						<p>Nachfolgend werden die Resultate der Entwicklung aufgezeigt:</p>
+					</div>
+				</section>
+				<section>
+					<div class="my-headline">
+						<h2>Unfalldaten einlesen und analysieren</h2>
+					</div>
+					<div class="my-content">
+						<div class="my-table-style">
+							<div class="left-container">
+								<img src="images/create.png">
+							</div>
+							<div class="right-container">
+								<p>Die Idee der Anwendung ist darauf ausgerichtet, dass Anwender Aktivitäten erstellen und weitere Anwender daran teilnehmen
+									können. Hierfür muss der Ersteller zunächst die Kategorie für die Aktivität bestimmen, den Ort auswählen (überfolgt
+									mit Hilfe von Google Maps), die Teilnehmeranzahl festlegen, das Datum und die Dauer bestimmen sowie zusätzliche
+									Informationen angeben. Andere Anwender erhalten anschließend eine Push-Benachrichtung, sollten sie sich für die
+									ausgewählte Kategorie interessieren und sich in der entsprechenden Entfernung zur Aktivität befinden. Beim Ersteller
+									wird zusätzlich im Kalender des Betriebssystems ein Termin für die Aktivität eingetragen.
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="my-headline">
+						<h2>Klassifizierte Unfalldaten anzeigen</h2>
+					</div>
+					<div class="my-content">
+						<div class="my-table-style">
+							<div class="left-container">
+								<img src="images/aktivitaeten.png">
+							</div>
+							<div class="right-container">
+								<p>Startseite der Anwendung ist die Übersicht über die bereits erstellten Aktivitäten. Hier wird grundsätzlich zwischen
+									erstellten Aktivitäten von Freunden und anderer Personen unterschieden. Diese Aktivitäten können über eine Reichweite
+									gefiltert und somit die Anzeige aktualisiert werden. Wird eine Aktivität ausgewählt so kann hier entsprechend teilgenommen
+									werden. Diese Funktion wird im Folgenden noch im Detail vorgestellt.
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>
+			</section>
+			<section>
+				<div class="my-headline">
+					<h2>Produktvideo</h2>
+				</div>
+				<div class="my-content">
+					<video controls height="360" width="640" poster="images/d-logo.png">
+						<source src="video/Test2.mp4" type="video/mp4" /> Ihr Browser kann dieses Video nicht wiedergeben.<br/>
+					</video>
+				</div>
+			</section>
+			<section>
+				<div class="my-headline">
+					<h2>Vielen Dank für Ihre Aufmerksamkeit!</h2>
+				</div>
+				<div class="my-content">
+					Traffic Accident Analyzer Entwicklerteam
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		Reveal.initialize({
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+			]
+		});
+	</script>
+</body>
+
+</html>

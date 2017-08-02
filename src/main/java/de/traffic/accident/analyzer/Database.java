@@ -11,6 +11,7 @@ public final class Database {
 	private static JsonElement NumbAccidentsToYearOfCar = null;
 	private static JsonElement NumbAccidentsToNumbPasseger = null;
 	private static JsonElement NumbOfDiffAccidentType = null;
+	private static JsonElement NumbAccidentsToVelocity = null;
 	
 	
 	private Database() {
@@ -57,7 +58,6 @@ public final class Database {
 		NumbOfDiffAccidentType = numbOfDiffAccidentType;
 	}
 
-
 	public static ArrayList<String[]> getWindowData() {
 		return WindowData;
 	}
@@ -94,7 +94,13 @@ public final class Database {
 		return s;
 	}
 	
-	
-	
+	public static JsonElement getNumbAccidentsToVelocity() {
+		return NumbAccidentsToVelocity;
+	}
+
+
+	public static void setNumbAccidentsToVelocity(JsonElement numbAccidentsToVelocity) {
+		NumbAccidentsToVelocity = numbAccidentsToVelocity;
+	}
 	
 }
