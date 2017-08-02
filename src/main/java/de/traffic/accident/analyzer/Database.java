@@ -14,6 +14,10 @@ public final class Database {
 	private static JsonElement NumbAccidentsToVelocity = null;
 	private static String NumbAccidentToVelocityToAccidentType = null;
 	
+	private static final int WINDOW_SIZE = 1000;
+	private static final int SLIDE_SIZE = 100;
+	private static final int FACTOR = 10;
+	
 	
 	private Database() {
 		// TODO Auto-generated constructor stub
@@ -101,6 +105,20 @@ public final class Database {
 
 	public static void setNumbAccidentToVelocityToAccidentType(String numbAccidentToVelocityToAccidentType) {
 		NumbAccidentToVelocityToAccidentType = numbAccidentToVelocityToAccidentType;
+	}
+	
+	public static int getWindowSize() {
+		return WINDOW_SIZE;
+	}
+
+
+	public static int getSlideSize() {
+		return SLIDE_SIZE;
+	}
+
+
+	public static int getFactor() {
+		return FACTOR;
 	}
 	
 }

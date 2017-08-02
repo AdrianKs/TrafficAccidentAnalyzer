@@ -20,7 +20,7 @@ public class MicroBatchProcessor implements Runnable {
 
 	private JavaStreamingContext streamingCont = null;
 	private HashMap<String, String> kafkaParams = null;
-	private ArrayList<String[]> emptyList = new ArrayList<String[]>();
+	private static ArrayList<String[]> emptyList = new ArrayList<String[]>();
 
 	public MicroBatchProcessor(JavaStreamingContext jsContext) {
 
@@ -38,7 +38,7 @@ public class MicroBatchProcessor implements Runnable {
 		topics.add("accidents");
 		JavaPairInputDStream<String, String> lines = KafkaUtils.createDirectStream(this.streamingCont, String.class,
 				String.class, StringDecoder.class, StringDecoder.class, kafkaParams, topics);
-		JavaDStream<Accident> accidents = lines.window(Durations.seconds(1000/10), Durations.seconds(100/10)).map(x -> {
+		JavaDStream<Accident> accidents = lines.window(Durations.seconds(Database.getWindowSize()/Database.getFactor()), Durations.seconds(Database.getSlideSize()/Database.getFactor())).map(x -> {
 			 ArrayList<String> elements = Lists.newArrayList(x._2.split(","));
 			 return new Accident(
 					 Integer.parseInt(elements.get(0)), 
@@ -75,12 +75,14 @@ public class MicroBatchProcessor implements Runnable {
 		
 		accidents.foreachRDD(rdd -> {
 			emptyList.removeAll(emptyList);
-			Database.setWindowData(emptyList);
+			//Database.setWindowData(emptyList);
 			rdd.foreach(accident -> {
 				String[] tmp = {Double.toString(accident.getLatitude()), Double.toString(accident.getLongitude())};
-				Database.addArrayToWindowData(tmp);
+				emptyList.add(tmp);
+				//Database.addArrayToWindowData(tmp);
 				accident.printValues();
 			});
+			Database.setWindowData(emptyList);
 		});
 		
 		this.streamingCont.start();

@@ -33,6 +33,12 @@ public class SparkWebserver {
 	            
 	            return new ModelAndView(model, "public/index.vm");
 	        }, new VelocityTemplateEngine());
+		 
+		 post("/refreshTrafficData", (request, response) -> {
+			 response.type("application/json");
+			 return Database.getHeatMapDataAsString();
+		 });
+		 
 		
 	}
 
