@@ -69,17 +69,6 @@ public final class Database {
 	
 	public static void addArrayToWindowData(String[] array){
 		WindowData.add(array);
-		printElements();
-	}
-	
-	private static void printElements(){
-		for (int i = 0; i < WindowData.size(); i++) {
-			System.out.println("ELEMENT-CONTENTS-LAT: " + WindowData.get(i)[0] + ", LONG: " + WindowData.get(i)[1]);
-		}
-	}
-	
-	public static void setHeatMapData(){
-		//SparkWebserver.setNewAccidentData(WindowData);
 	}
 	
 	public static String getHeatMapDataAsString() {
