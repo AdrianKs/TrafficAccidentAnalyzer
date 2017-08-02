@@ -1,11 +1,24 @@
 body {
 	width: 100%;
+	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
 }
 
 .myHeader {
 	width:100%;
 	height: 20%;
 	top: 0;	
+}
+
+.myHeader img {
+  float: left;
+  width: 60px;
+  height: 60px;
+}
+
+.myHeader h1 {
+  position: relative;
+  top: 18px;
+  left: 10px;
 }
 
 .container {
