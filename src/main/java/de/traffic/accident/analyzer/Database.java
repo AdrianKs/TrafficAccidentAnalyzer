@@ -12,6 +12,7 @@ public final class Database {
 	private static JsonElement NumbAccidentsToNumbPasseger = null;
 	private static JsonElement NumbOfDiffAccidentType = null;
 	private static JsonElement NumbAccidentsToVelocity = null;
+	private static String NumbAccidentToVelocityToAccidentType = null;
 	
 	
 	private Database() {
@@ -90,6 +91,16 @@ public final class Database {
 
 	public static void setNumbAccidentsToVelocity(JsonElement numbAccidentsToVelocity) {
 		NumbAccidentsToVelocity = numbAccidentsToVelocity;
+	}
+
+
+	public static String getNumbAccidentToVelocityToAccidentType() {
+		return NumbAccidentToVelocityToAccidentType;
+	}
+
+
+	public static void setNumbAccidentToVelocityToAccidentType(String numbAccidentToVelocityToAccidentType) {
+		NumbAccidentToVelocityToAccidentType = numbAccidentToVelocityToAccidentType;
 	}
 	
 }

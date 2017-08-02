@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>D3 Page Template</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    <style>
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: black;
+            shape-rendering: crispEdges;
+        }
+
+        .axis text {
+            font-family: sans-serif;
+            font-size: 11px;
+        }
+
+        .dot {
+            stroke: #000;
+        }
+
+        .legend {
+            margin: 5px;
+            font: 10px sans-serif;
+            background: yellow;
+            box-shadow: 2px 2px 1px #888;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div id="mbars"></div>
+</div>
+<script type="text/javascript">
+    var margin = {top: 20, right: 20, bottom: 70, left: 40},
+        width = 1000 - margin.left - margin.right,
+        height = 800 - margin.top - margin.bottom;
+
+
+
+    var dataset = [
+        [{"_1":"Stone Chip","_2":177},{"_1":"Flying Object","_2":135},{"_1":"Ruptured Tire","_2":176},{"_1":"Light Collision","_2":87},{"_1":"Moderate Collision","_2":4},{"_1":"Grave Collision","_2":100},{"_1":"Not analysable","_2":4}],
+        [{"_1":"Stone Chip","_2":50},{"_1":"Flying Object","_2":77},{"_1":"Ruptured Tire","_2":200},{"_1":"Light Collision","_2":87},{"_1":"Moderate Collision","_2":50},{"_1":"Grave Collision","_2":8},{"_1":"Not analysable","_2":7}],
+        [{"_1":"Stone Chip","_2":17},{"_1":"Flying Object","_2":202},{"_1":"Ruptured Tire","_2":87},{"_1":"Light Collision","_2":4},{"_1":"Moderate Collision","_2":4},{"_1":"Grave Collision","_2":20},{"_1":"Not analysable","_2":4}],
+        [{"_1":"Stone Chip","_2":77},{"_1":"Flying Object","_2":20},{"_1":"Ruptured Tire","_2":176},{"_1":"Light Collision","_2":176},{"_1":"Moderate Collision","_2":90},{"_1":"Grave Collision","_2":73},{"_1":"Not analysable","_2":12}],
+        [{"_1":"Stone Chip","_2":180},{"_1":"Flying Object","_2":44},{"_1":"Ruptured Tire","_2":5},{"_1":"Light Collision","_2":87},{"_1":"Moderate Collision","_2":4},{"_1":"Grave Collision","_2":8},{"_1":"Not analysable","_2":9}],
+        [{"_1":"Stone Chip","_2":44},{"_1":"Flying Object","_2":135},{"_1":"Ruptured Tire","_2":37},{"_1":"Light Collision","_2":73},{"_1":"Moderate Collision","_2":7},{"_1":"Grave Collision","_2":2},{"_1":"Not analysable","_2":7}],
+        [{"_1":"Stone Chip","_2":54},{"_1":"Flying Object","_2":88},{"_1":"Ruptured Tire","_2":78},{"_1":"Light Collision","_2":87},{"_1":"Moderate Collision","_2":4},{"_1":"Grave Collision","_2":8},{"_1":"Not analysable","_2":8}],
+        [{"_1":"Stone Chip","_2":200},{"_1":"Flying Object","_2":135},{"_1":"Ruptured Tire","_2":176},{"_1":"Light Collision","_2":87},{"_1":"Moderate Collision","_2":100},{"_1":"Grave Collision","_2":30},{"_1":"Not analysable","_2":7}],
+    ]
+
+//    var dataset = [
+//        [{"_1":"Stone Chip","_2":17},{"_1":"Flying Object","_2":135}],
+//        [{"_1":"Stone Chip","_2":50},{"_1":"Flying Object","_2":77}],
+//        [{"_1":"Stone Chip","_2":80},{"_1":"Flying Object","_2":30}],
+//    ]
+
+    dataset.forEach(function (d) {
+        d.forEach(function (d){
+            d.y = d._2;
+            delete d._2;
+        });
+    });
+
+    //Set up stack method
+    var stack = d3.layout.stack();
+    //Data, stacked
+    stack(dataset);
+
+    var color_hash = {
+        0: ["0 - 30km/h", "#00aedb"],
+        1: ["30 - 60km/h", "#f47835"],
+        2: ["60 - 90km/h", "#00ff00"],
+        3: ["90 - 120km/h", "#a200ff"],
+        4: ["120 - 150km/h", "#d41243"],
+        5: ["150 - 180km/h", "#0000ff"],
+        6: ["180 - 220km/h", "#008000"],
+        7: [">220km/h", "#ee1289"]
+    };
+
+    var scales = dataset[0];
+
+    //Set up scales
+    var xScale = d3.scale.ordinal()
+        .rangeRoundBands([0, width], .4);
+
+    xScale.domain(scales.map(function (d) {
+        return d._1;
+    }));
+
+    var yScale = d3.scale.linear()
+        .domain([0,
+            d3.max(dataset, function (d) {
+                return d3.max(d, function (d) {
+                    return d.y0 + d.y;
+                });
+            })
+        ])
+        .range([height - margin.bottom - margin.top, 0]);
+
+    var xAxis = d3.svg.axis()
+        .scale(xScale)
+        .orient("bottom");
+
+    var yAxis = d3.svg.axis()
+        .scale(yScale)
+        .orient("left")
+        .ticks(10);
+
+
+    //Easy colors accessible via a 10-step ordinal scale
+    //    var colors = d3.scale.category10();
+
+    //Create SVG element
+    var svg = d3.select("#mbars")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    // Add a group for each row of data
+    var groups = svg.selectAll("g")
+        .data(dataset)
+        .enter()
+        .append("g")
+        .attr("class", "rgroups")
+        .attr("transform", "translate(" + margin.left + "," + (height - margin.bottom) + ")")
+        .style("fill", function (d, i) {
+            return color_hash[dataset.indexOf(d)][1];
+        });
+
+    // Add a rect for each data value
+    var rects = groups.selectAll("rect")
+        .data(function (d) {
+            return d;
+        })
+        .enter()
+        .append("rect")
+        .attr("width", 2)
+        .style("fill-opacity", 1e-6);
+
+
+    rects.transition()
+        .duration(function (d, i) {
+            return 500 * i;
+        })
+        .ease("linear")
+        .attr("x", function (d) {
+            return xScale(d._1);
+        })
+        .attr("y", function (d) {
+            return -(-yScale(d.y0) - yScale(d.y) + (height - margin.top - margin.bottom) * 2);
+        })
+        .attr("height", function (d) {
+            return -yScale(d.y) + (height - margin.top - margin.bottom);
+        })
+        .attr("width", xScale.rangeBand())
+        .style("fill-opacity", 1);
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(40," + (height - margin.bottom) + ")")
+        .call(xAxis);
+
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .call(yAxis);
+
+    // adding legend
+
+    var legend = svg.append("g")
+        .attr("class", "legend")
+        .attr("x", width - margin.right - 65)
+        .attr("y", 25)
+        .attr("height", 100)
+        .attr("width", 100);
+
+    legend.selectAll("g").data(dataset)
+        .enter()
+        .append('g')
+        .each(function (d, i) {
+            var g = d3.select(this);
+            g.append("rect")
+                .attr("x", width - margin.right - 65)
+                .attr("y", i * 25 + 10)
+                .attr("width", 10)
+                .attr("height", 10)
+                .style("fill", color_hash[String(i)][1]);
+
+            g.append("text")
+                .attr("x", width - margin.right - 50)
+                .attr("y", i * 25 + 20)
+                .attr("height", 30)
+                .attr("width", 100)
+                .style("fill", color_hash[String(i)][1])
+                .text(color_hash[String(i)][0]);
+        });
+
+</script>
+</body>
+</html>
