@@ -6,8 +6,7 @@
    <script src="../js/app.js" type="text/javascript"></script>
    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
    <script src="//d3js.org/d3.v3.min.js"></script>
-   <script src="realworldpoints.js" type="text/javascript"></script>
-   <script src="leaflet-heat.js" type="text/javascript"></script>
+   <script src="../js/jquery-3.2.1.js" type="text/javascript"></script>
     <style>
         body { font: 16px/1.4 "Helvetica Neue", Arial, sans-serif; }
         .ghbtns { position: relative; top: 4px; margin-left: 5px; }
@@ -58,20 +57,46 @@
 	<script src="../js/test1.js"></script>
 	<script src="../js/realworldpoints.js"></script>
 	<script>
+		
+		setInterval(get_data, 3000);
+		
 		var map = L.map('map').setView([43.70, -79.375], 12);
 		
 		var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 		}).addTo(map);
 		
-		var ap = ${ap}
-		console.log(${ap})
+		var heat;
+		$.ajax({
+				type: 'POST',
+				url: 'http://localhost:4567/refreshTrafficData',
+				success: function(data){
+						data = data.map(function (p) {return [p[0], p[1]]; });
+						heat = L.heatLayer(data).addTo(map);
+				}
+		})
 		
-		ap = ap.map(function (p) {return [p[0], p[1]]; });
+		//var ap = ${ap};
+		//ap = ap.map(function (p) {return [p[0], p[1]]; });
+		//var heat = L.heatLayer(ap).addTo(map);
+		
+		function get_data(){
+		console.log("works");
+			$.ajax({
+				type: 'POST',
+				url: 'http://localhost:4567/refreshTrafficData',
+				success: function(data){
+						data = data.map(function (p) {return [p[0], p[1]]; });
+						heat.setLatLngs(data);
+				}
+			})
+		}
+		
+		
 		
 		//addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
 		
-		var heat = L.heatLayer(ap).addTo(map);
+		
 	</script>
 	
 
