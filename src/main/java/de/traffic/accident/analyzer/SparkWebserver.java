@@ -37,31 +37,6 @@ public class SparkWebserver {
 			 return Database.getHeatMapDataAsString();
 		 });
 		 
-		 post("/getNumberOfAccidentsToBrand", (request, response) -> {
-			 response.type("application/json");
-			 return Database.getNumbAccidentsToBrand();
-		 });
-		 
-		 post("/getNumberDiffAccidentsOfType", (request, response) -> {
-			 response.type("application/json");
-			 return Database.getNumbOfDiffAccidentType();
-		 });
-		 
-		 post("/getNumberOfAccidentsToNumbPassenger", (request, response) -> {
-			 response.type("application/json");
-			 return Database.getNumbAccidentsToNumbPasseger();
-		 });
-		 
-		 post("/getNumberOfAccidentsToVel", (request, response) -> {
-			 response.type("application/json");
-			 return Database.getNumbAccidentsToVelocity();
-		 });
-		 
-		 post("/getNumberOfAccidentsToYearOfCar", (request, response) -> {
-			 response.type("application/json");
-			 return Database.getNumbAccidentsToYearOfCar();
-		 });
-		 
 		
 	}
 
