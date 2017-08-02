@@ -103,5 +103,6 @@ public class MicroBatchProcessor implements Runnable {
 		this.streamingCont.close();
 
 	}
+	
 
 }
