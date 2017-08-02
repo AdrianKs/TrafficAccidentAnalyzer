@@ -12,12 +12,18 @@ body {
 	width: 99%;
 	height: 100%;
 	position: absolute;
+	text-align: center;
 }
 
 .mapContainer {
     border: 1px solid black;
     width: 100%;
     height: 60%;
+}
+
+.svgContainer{
+	 width: 100%;
+	 height: 100%;
 }
 
 .diagram1Container{

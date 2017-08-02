@@ -14,11 +14,15 @@
 	    <h1>Traffic Accident Analyzer</h1>
 	    <p></p>
 	</div>
-	<div class="container">
+	<div class="container" id="container">
 		<div class="mapContainer">
 			<div id="map"></div>
 		</div>
-		<div class="diagram1Container">
+		<div class="svgContainer" id="svgContainer">
+		
+		</div>
+		
+		<!--<div class="diagram1Container">
 			<p>Number of Accidents to Year of Car<p>
 			<div id="dia1"></div>
 		</div>
@@ -37,7 +41,7 @@
 		<div class="diagram5Container">
 			<p>Beba Diagram<p>
 			<div id="dia5"></div>
-		</div>
+		</div>-->
 	</div>
 
 
@@ -65,8 +69,9 @@
 <script>
 // set the dimensions of the canvas
 var margin = {top: 20, right: 20, bottom: 70, left: 40},
-   	width = 100% - margin.left - margin.right,
-    height = 100% - margin.top - margin.bottom;
+  	width = 800 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
 
 
 // set the ranges
@@ -87,13 +92,21 @@ var yAxis = d3.svg.axis()
 
 
 // add the SVG element
-var svg = d3.select("#dia1").append("svg")
-    .attr("width", "100%")
-    .attr("height","100%")
-  .append("g")
+var svg = d3.select("#svgContainer").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height",height + margin.top + margin.bottom)
+  	.append("g")
     .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
-
+ 
+svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (0))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "24px") 
+        .style("text-decoration", "")  
+        .text("Number of Accidents to Year of Car");
+        
 // load the data
 //var data = [{"Letter": "A","Freq": 20},{"Letter" : "B","Freq": 12}]
 //var data = [{"_1":"Audi","_2":528},{"_1":"BMW","_2":556}]
@@ -176,7 +189,7 @@ var yAxis = d3.svg.axis()
 
 
 // add the SVG element
-var svg = d3.select("#dia2").append("svg")
+var svg = d3.select("#svgContainer").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -264,7 +277,7 @@ var yAxis = d3.svg.axis()
 
 
 // add the SVG element
-var svg = d3.select("#dia3").append("svg")
+var svg = d3.select("#svgContainer").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -347,7 +360,7 @@ var yAxis = d3.svg.axis()
 
 
 // add the SVG element
-var svg = d3.select("#dia4").append("svg")
+var svg = d3.select("#svgContainer").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
