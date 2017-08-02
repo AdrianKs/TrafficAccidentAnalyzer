@@ -22,12 +22,14 @@ public class SparkWebserver {
 			 	JsonElement numbAccidentsToYearOfCar = Database.getNumbAccidentsToYearOfCar();
 			 	JsonElement numbAccidentsToNumbPasseger = Database.getNumbAccidentsToNumbPasseger();
 			 	JsonElement numbOfDiffAccidentType = Database.getNumbOfDiffAccidentType();
+			 	String numbAccidentToVelocityToAccidentType = Database.getNumbAccidentToVelocityToAccidentType();
 	            Map<String, Object> model = new HashMap<>();
 	            model.put("ap", Database.getHeatMapDataAsString());
 	            model.put("numbAccidentsToBrand", numbAccidentsToBrand);
 	            model.put("numbAccidentsToYearOfCar", numbAccidentsToYearOfCar);
 	            model.put("numbAccidentsToNumbPasseger", numbAccidentsToNumbPasseger);
 	            model.put("numbOfDiffAccidentType", numbOfDiffAccidentType);
+	            model.put("numbAccidentToVelocityToAccidentType", numbAccidentToVelocityToAccidentType);
 	            
 	            return new ModelAndView(model, "public/index.vm");
 	        }, new VelocityTemplateEngine());
