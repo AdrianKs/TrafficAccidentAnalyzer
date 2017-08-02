@@ -175,14 +175,5 @@ public class BatchProcesser implements Runnable {
 		}
 	}
 	
-	public static JsonElement getJsonByBrand(){
-		if(jsonByBrand != null) {
-			return jsonByBrand;
-		}
-		else {
-			return null;
-		}	
-	}
-	
 	
 }
