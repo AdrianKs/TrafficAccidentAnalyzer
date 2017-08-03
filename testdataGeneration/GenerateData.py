@@ -52,6 +52,11 @@ def appendDecimals(number, appendix):
     else:
         return float(str(number) + str(appendix))
 
+    # if appendix < 10:
+    #     return float(str(number) + "0" + str(appendix))
+    # else:
+    #     return float(str(number) + str(appendix))
+
 
 # Read all accident locations from json
 with open('accLocations.json') as data_file:
@@ -77,7 +82,9 @@ for accLocation in accLocations:
 
 def generateNewLatOrLong(latOrLong):
     newLatOrLong = truncate(latOrLong, 3)
+    # newLatOrLong = truncate(latOrLong, 4)
     randomInt = random.randint(0, 999)
+    # randomInt = random.randint(0, 99)
     newLatOrLong = appendDecimals(newLatOrLong, randomInt)
     return newLatOrLong
 
