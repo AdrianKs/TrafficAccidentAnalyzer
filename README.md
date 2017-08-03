@@ -7,7 +7,7 @@ The sources for collecting the accident data are the vehicles themselves. The ap
 - Import the project as "Existing Maven Project"
 - Run "App.java" to start the data transfering services and the webserver
 - After successfully launching the services enter "localhost:4567" in your browser
-- [Link to project presentation](http://htmlpreview.github.io/?https://github.com/AdrianKs/TrafficAccidentAnalyzer/tree/master/presentation/index.html)
+- [Link to project presentation](http://htmlpreview.github.io/?https://github.com/AdrianKs/TrafficAccidentAnalyzer/blob/master/presentation/index.html)
 
 ## Developers
 * **Sebastian Röhling**
