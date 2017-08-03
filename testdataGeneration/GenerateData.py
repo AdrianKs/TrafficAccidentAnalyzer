@@ -45,8 +45,10 @@ def truncate(f, n):
 
 
 def appendDecimals(number, appendix):
-    if appendix < 10:
+    if appendix < 100:
         return float(str(number) + "0" + str(appendix))
+    elif appendix < 10:
+        return float(str(number) + "00" + str(appendix))
     else:
         return float(str(number) + str(appendix))
 
@@ -74,8 +76,8 @@ for accLocation in accLocations:
 
 
 def generateNewLatOrLong(latOrLong):
-    newLatOrLong = truncate(latOrLong, 4)
-    randomInt = random.randint(0, 99)
+    newLatOrLong = truncate(latOrLong, 3)
+    randomInt = random.randint(0, 999)
     newLatOrLong = appendDecimals(newLatOrLong, randomInt)
     return newLatOrLong
 
@@ -241,7 +243,7 @@ headerRow = ["timestamp", "lat", "long", "brand", "model", "constrYear", "color"
              "windowLeftFront", "windowRightFront", "windowLeftRear", "windowRightRear", "windowRear", "v10SecAgo",
              "v5SecAgo", "v3SecAgo", "v2SecAgo", "v1SecAgo"]
 
-with open('../src/main/resources/taa.csv', 'wb') as csvfile:
+with open('../src/main/resources/taa2.csv', 'wb') as csvfile:
     spamwriter = csv.writer(csvfile, delimiter=',',
                             quotechar='\'', quoting=csv.QUOTE_MINIMAL)
     spamwriter.writerow(headerRow)
@@ -254,7 +256,7 @@ with open('../src/main/resources/taa.csv', 'wb') as csvfile:
         brand = getBrand()
         model = getModel(brand)
 
-        p = random.randint(1,100);
+        p = random.randint(1, 100);
         if p <= 20:
             constrYear = random.randint(1995, 1996)
         elif p > 20 and p <= 40:
@@ -267,7 +269,15 @@ with open('../src/main/resources/taa.csv', 'wb') as csvfile:
             constrYear = random.randint(2012, 2017)
 
         color = getColor()
-        passengers = random.randint(1, 5)
+        p = random.randint(1, 100);
+        if p <= 35:
+            passengers = 1
+        elif p > 35 and p <= 45:
+            passengers = 2
+        elif p > 45 and p <= 65:
+            passengers = 3
+        else:
+            passengers = random.randint(4, 5)
 
         p = random.randint(1, 100);
         if p <= 10:
