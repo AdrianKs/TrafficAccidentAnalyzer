@@ -23,7 +23,7 @@ public class SampleDataProducer implements Runnable {
 	private final Logger log = LoggerFactory.getLogger(SampleDataProducer.class);
 	private final KafkaProducer<String, String> producer;
 	private final String topic;
-	static String csvFile = "src/main/resources/taa.csv";
+	static String csvFile = "src/main/resources/taa2.csv";
 
 	public SampleDataProducer() {
 		Properties props = new Properties();

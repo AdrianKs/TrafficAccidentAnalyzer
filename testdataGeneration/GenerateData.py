@@ -307,22 +307,22 @@ with open('../src/main/resources/taa2.csv', 'wb') as csvfile:
 
         # Check if airbags were activated
         if v1SecAgo > 40:
-            if random.randint(1, 10) > 1:
+            if random.randint(1, 10) > 4:
                 abLeftFront = True
             else:
                 abLeftFront = False
 
-            if random.randint(1, 10) > 1:
+            if random.randint(1, 10) > 4:
                 abRightFront = True
             else:
                 abRightFront = False
 
-            if random.randint(1, 10) > 1:
+            if random.randint(1, 10) > 4:
                 abLeftMid = True
             else:
                 abLeftMid = False
 
-            if random.randint(1, 10) > 1:
+            if random.randint(1, 10) > 4:
                 abRightMid = True
             else:
                 abRightMid = False

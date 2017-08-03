@@ -97,25 +97,25 @@ public class App {
 				accident.getAbRightMid());
 
 		if (tiresDamaged == 0 && airbagsTriggered == 0) {
-			if (windowsDamaged == 1) {
+//			if (windowsDamaged == 1) {
 				accident.setAccidentType(AccidentType.STONE_CHIP);
 				return AccidentType.STONE_CHIP;
-			}
-			if (windowsDamaged > 1) {
-				accident.setAccidentType(AccidentType.FLYING_OBJECT);
-				return AccidentType.FLYING_OBJECT;
-			}
-			else {
-				accident.setAccidentType(AccidentType.NOT_ANALYZABLE);
-				return AccidentType.NOT_ANALYZABLE;
-			}
+//			}
+//			if (windowsDamaged > 1) {
+//				accident.setAccidentType(AccidentType.FLYING_OBJECT);
+//				return AccidentType.FLYING_OBJECT;
+//			}
+//			else {
+//				accident.setAccidentType(AccidentType.NOT_ANALYZABLE);
+//				return AccidentType.NOT_ANALYZABLE;
+//			}
 		}
 		else if(tiresDamaged >= 1 && airbagsTriggered == 0 && windowsDamaged == 0){
 			accident.setAccidentType(AccidentType.RUPTURED_TIRE);
 			return AccidentType.RUPTURED_TIRE;
 		}
 		//schwerer Auffahrunfall
-		else if(airbagsTriggered >= 2 && (windowsDamaged+tiresDamaged) >=2){
+		else if(airbagsTriggered >= 3 && (windowsDamaged+tiresDamaged) >=3){
 			accident.setAccidentType(AccidentType.GRAVE_COLLISION);
 			return AccidentType.GRAVE_COLLISION;
 		}
